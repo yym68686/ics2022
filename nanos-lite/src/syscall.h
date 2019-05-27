@@ -1,1 +1,0 @@
-../../navy-apps/libs/libos/src/syscall.h
