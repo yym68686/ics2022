@@ -13,10 +13,6 @@ size_t events_read(void *buf, size_t len) {
   char keydown_char = (key & 0x8000 ? 'd' : 'u');
   key &= ~0x8000;
   if (key != _KEY_NONE) {
-    if (key == _KEY_F12 && keydown_char == 'u') {
-      void change_game();
-      change_game();
-    }
     return snprintf(buf, len, "k%c %s\n", keydown_char, keyname[key]) - 1;
   }
   else {
