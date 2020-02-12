@@ -235,7 +235,11 @@ void exec_wrapper(bool print_flag) {
 #ifdef DEBUG
   int instr_len = decoding.seq_eip - cpu.eip;
   sprintf(decoding.p, "%*.s", 50 - (12 + 3 * instr_len), "");
-  strcat(decoding.asm_buf, decoding.assembly);
+  char strbuf[512];
+  strcpy(strbuf, decoding.asm_buf);
+  // strcat(decoding.asm_buf, decoding.assembly);
+  strcat(strbuf, decoding.assembly);
+  strcpy(decoding.asm_buf, strbuf);
   Log_write("%s\n", decoding.asm_buf);
   if (print_flag) {
     puts(decoding.asm_buf);
