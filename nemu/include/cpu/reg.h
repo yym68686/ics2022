@@ -15,13 +15,18 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  */
 
 typedef struct {
-  struct {
-	union{
-		uint32_t _32;
-		uint16_t _16;
-		uint8_t _8[2];
-	};
-  } gpr[8];
+  union{
+	  struct {
+		union{
+			uint32_t _32;
+			uint16_t _16;
+			uint8_t _8[2];
+		};
+	  } gpr[8];
+      struct {
+		  rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
+	  };
+  };
 
   /* Do NOT change the order of the GPRs' definitions. */
 
@@ -29,8 +34,6 @@ typedef struct {
    * in PA2 able to directly access these registers.
    */
 //   rtlreg_t &eax = gpr[0], &ecx = gpr[2], &edx = gpr[1], &ebx = gpr[3], &esp = gpr[7], &ebp = gpr[4], &esi = gpr[5], &edi = gpr[6];
-  rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
-
   vaddr_t eip;
 
 } CPU_state;
