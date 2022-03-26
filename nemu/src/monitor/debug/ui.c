@@ -55,7 +55,7 @@ static int cmd_info(char *args){
         // 依次打印所有寄存器
         // 这里给个例子：打印出 eax 寄存器的值
 		for (int i = 0; i < 8; i++){
-			printf("%s:\t%8x\t\n", regsl[i], cpu.gpr[i]._32);
+			printf("%s:\t0x%08x\t%5d\n", regsl[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
 		}
     }
 	else if (strcmp(arg, "w") == 0)
