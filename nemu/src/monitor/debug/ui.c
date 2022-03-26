@@ -43,7 +43,25 @@ static int cmd_si(char *args){
 	else cpu_exec(atoi(arg));
 	return 0;
 }
-
+static int cmd_info(char *args){
+    char *arg = strtok(NULL, " ");
+    // 分割字符
+	if (arg == NULL){
+		puts("Missing parameter.");
+		return 0;
+	}
+    if (strcmp(arg, "r") == 0)
+    {
+        // 依次打印所有寄存器
+        // 这里给个例子：打印出 eax 寄存器的值
+        printf("%s:\t%8x\t", regsl[0], cpu.gpr[0]._32);
+    }
+	else if (strcmp(arg, "w") == 0)
+    {
+        // 这里我们会在 PA1.3 中实现
+    }
+    return 0;
+}
 static struct {
   char *name;
   char *description;
@@ -52,7 +70,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "step in", cmd_si },
+  { "si", "Single step execution", cmd_si },
+  { "info", "Print program status", cmd_info },
 
   /* TODO: Add more commands */
 
