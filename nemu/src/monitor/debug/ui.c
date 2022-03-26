@@ -65,6 +65,28 @@ static int cmd_info(char *args){
     }
     return 0;
 }
+static int cmd_x(char *args){
+    //分割字符串，得到起始位置和要读取的次数
+    char *arg1 = strtok(NULL, " ");
+	if (arg1 == NULL){
+		puts("Missing parameter.");
+		return 0;
+	}
+    char *arg2 = strtok(NULL, " ");
+	if (arg2 == NULL){
+		puts("Missing parameter.");
+        return 0;
+    }
+
+    //循环使用 vaddr_read 函数来读取内存
+    for(int i = 0; i < atoi(arg1); i++){
+		
+        uint32_t instr = vaddr_read(arg2, 4);    //如何调用，怎么传递参数，请阅读代码
+		//每次循环将读取到的数据用 printf 打印出来
+        //如果你不知道应该打印什么，可以参考参考输出形式
+		printf("%d\t0x%08x\t\n", , cpu.gpr[i]._32, cpu.gpr[i]._32);
+    }
+}
 
 static struct {
   char *name;
@@ -76,6 +98,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single step execution", cmd_si },
   { "info", "Print program status", cmd_info },
+  { "x", "Scan memory", cmd_x },
 
   /* TODO: Add more commands */
 
