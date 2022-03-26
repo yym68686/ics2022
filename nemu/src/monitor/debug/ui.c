@@ -54,7 +54,7 @@ static int cmd_info(char *args){
     {
         // 依次打印所有寄存器
         // 这里给个例子：打印出 eax 寄存器的值
-        printf("%s:\t%8x\t", regsl[0], cpu.gpr[0]._32);
+        printf("%s:\t%8x\t\n", regsl[0], cpu.gpr[0]._32);
     }
 	else if (strcmp(arg, "w") == 0)
     {
