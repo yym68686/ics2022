@@ -86,6 +86,13 @@ static int cmd_x(char *args){
             n = 16 * n + (s[i] - '0');
     }
 	printf("%d\n", n);
+	uint32_t instr = vaddr_read(n, 4);    //如何调用，怎么传递参数，请阅读代码
+	uint8_t *p_instr = (void *)&instr;
+    int i;
+    for (i = 0; i < 4; i ++) {
+		printf("%02x ", p_instr[i]);
+// 		decoding.p += sprintf(decoding.p, "%02x ", p_instr[i]);
+    }
 	return 0;
     //循环使用 vaddr_read 函数来读取内存
 //     for(int i = 0; i < atoi(arg1); i++){
