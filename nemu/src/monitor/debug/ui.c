@@ -77,6 +77,7 @@ static int cmd_x(char *args){
 		puts("Missing parameter.");
         return 0;
     }
+	arg2 = strtok(NULL, "0x");
 	printf("%s\n", arg2);
 	return 0;
     //循环使用 vaddr_read 函数来读取内存
