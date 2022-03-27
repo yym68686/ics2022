@@ -85,24 +85,24 @@ static int cmd_x(char *args){
             n = 16 * n + (s[i] - '0');
     }
 // 	printf("%d\n", n);
-	uint32_t instr = vaddr_read(n, 4);    //如何调用，怎么传递参数，请阅读代码
-	uint8_t *p_instr = (void *)&instr;
-    for (int i = 0; i < 4; i ++) {
-		printf("%02x ", p_instr[i]);
-	}
-	puts("");
+// 	uint32_t instr = vaddr_read(n, 4);    //如何调用，怎么传递参数，请阅读代码
+// 	uint8_t *p_instr = (void *)&instr;
+//     for (int i = 0; i < 4; i ++) {
+// 		printf("%02x ", p_instr[i]);
+// 	}
     //循环使用 vaddr_read 函数来读取内存
     for(int i = 0; i < atoi(arg1); i++){
         uint32_t instr = vaddr_read(n, 4);    //如何调用，怎么传递参数，请阅读代码
 		uint8_t *p_instr = (void *)&instr;
 		printf("0x%08x\t0x%08x\t", n, instr);
 		for (int i = 0; i < 4; i++) 
-			printf("%02x \n", p_instr[i]);
+			printf("%02x ", p_instr[i]);
 		//每次循环将读取到的数据用 printf 打印出来
         //如果你不知道应该打印什么，可以参考参考输出形式
 // 		printf("%d\t0x%08x\t\n", , cpu.gpr[i]._32, cpu.gpr[i]._32);
 // 		printf("%d\n", instr);
 		n += 4;
+		puts("");
     }
 	return 0;
 }
