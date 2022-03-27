@@ -72,12 +72,20 @@ static int cmd_x(char *args){
 		puts("Missing parameter.");
 		return 0;
 	}
-    char *arg2 = strtok(NULL, " ");
-	if (arg2 == NULL){
+    char *s = strtok(NULL, " ");
+	if (s == NULL){
 		puts("Missing parameter.");
         return 0;
     }
-	printf("%d\n", arg2[1]);
+	uint32_t n = 0;
+    for (int i = 2; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++)
+    {
+        if (s[i] > '9')
+            n = 16 * n + (10 + s[i] - 'a');
+        else
+            n = 16 * n + (s[i] - '0');
+    }
+	printf("%d\n", n);
 	return 0;
     //循环使用 vaddr_read 函数来读取内存
 //     for(int i = 0; i < atoi(arg1); i++){
