@@ -77,15 +77,17 @@ static int cmd_x(char *args){
 		puts("Missing parameter.");
         return 0;
     }
-
+	printf("%s\n", arg2);
+	return 0;
     //循环使用 vaddr_read 函数来读取内存
-    for(int i = 0; i < atoi(arg1); i++){
+//     for(int i = 0; i < atoi(arg1); i++){
 		
-        uint32_t instr = vaddr_read(arg2, 4);    //如何调用，怎么传递参数，请阅读代码
+//         uint32_t instr = vaddr_read(arg2, 4);    //如何调用，怎么传递参数，请阅读代码
 		//每次循环将读取到的数据用 printf 打印出来
         //如果你不知道应该打印什么，可以参考参考输出形式
-		printf("%d\t0x%08x\t\n", , cpu.gpr[i]._32, cpu.gpr[i]._32);
-    }
+// 		printf("%d\t0x%08x\t\n", , cpu.gpr[i]._32, cpu.gpr[i]._32);
+// 		printf("%d\n", instr);
+//     }
 }
 
 static struct {
