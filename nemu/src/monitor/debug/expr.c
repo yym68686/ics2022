@@ -98,31 +98,30 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
          case TK_NOTYPE:
-			 tokens[index++].type = TK_NOTYPE;
+			 tokens[nr_token].type = TK_NOTYPE;
          case TK_EQ:
-			 tokens[index++].type = TK_EQ;
+			 tokens[nr_token].type = TK_EQ;
          case TK_HEX:
-			 tokens[index++].type = TK_HEX;
+			 tokens[nr_token].type = TK_HEX;
          case TK_DEC:
-			 tokens[index++].type = TK_DEC;
+			 tokens[nr_token].type = TK_DEC;
          case TK_REG:
-			 tokens[index++].type = TK_REG;
+			 tokens[nr_token].type = TK_REG;
          case LeftBracket:
-			 tokens[index++].type = TK_LeftBracket;
+			 tokens[nr_token].type = TK_LeftBracket;
          case RightBracket:
-			 tokens[index++].type = TK_RightBracket;
+			 tokens[nr_token].type = TK_RightBracket;
          case PLUS:
-			 tokens[index++].type = TK_PLUS;
+			 tokens[nr_token].type = TK_PLUS;
          case MINUS:
-			 tokens[index++].type = TK_MINUS;
+			 tokens[nr_token].type = TK_MINUS;
          case TIMES:
-			 tokens[index++].type = TK_TIMES;
+			 tokens[nr_token].type = TK_TIMES;
 		 case DIVIDE:
-			 tokens[index++].type = TK_DIVIDE;
+			 tokens[nr_token].type = TK_DIVIDE;
          default: TODO();
         }
-		strncpy(tokens[index].str, e + substr_start, substr_len);
-
+		strncpy(tokens[nr_token++].str, e + substr_start, substr_len);
         break;
       }
     }
