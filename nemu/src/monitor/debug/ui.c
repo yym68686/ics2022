@@ -102,6 +102,10 @@ static int cmd_p(char *args){
 // 		return 0;
 // 	}
     printf("%d\n", check_parentheses("(2 - 1)"));
+    printf("%d\n", check_parentheses("(4 + 3 * (2 - 1))"));
+    printf("%d\n", check_parentheses("4 + 3 * (2 - 1)"));
+    printf("%d\n", check_parentheses("(4 + 3)) * ((2 - 1)"));
+    printf("%d\n", check_parentheses("(4 + 3) * (2 - 1)"));
 	return 0;
 }	
 
