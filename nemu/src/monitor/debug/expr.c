@@ -138,7 +138,7 @@ bool check_parentheses(char *str){
     int sta = 0, pos = 0;
 	while (pos != strlen(str)){
 		if (strcmp(str + pos, "(") == 0)
-			str++;
+			sta++;
 		else if (strcmp(str + pos, ")") == 0)
 			sta--;
 		else if (pos == strlen(str) - 1)
