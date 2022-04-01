@@ -143,9 +143,8 @@ bool check_parentheses(char *str){
 			sta--;
 		else if (pos == strlen(str) - 1 || pos == 0)
 			return false;
-		if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
+		if ((pos++ != strlen(str) - 1 &&sta <= 0) || sta < 0)
 			return false;
-		pos++;
 	}
 	return true;
 }
