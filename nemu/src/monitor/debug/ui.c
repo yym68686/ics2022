@@ -96,12 +96,11 @@ static int cmd_x(char *args){
 	return 0;
 }
 static int cmd_p(char *args){
-    char *arg = strtok(NULL, " ");
-	if (arg == NULL){
-		puts("Missing parameter.");
-		return 0;
-	}
-	puts(arg);
+	puts(args);
+// 	if (arg == NULL){
+// 		puts("Missing parameter.");
+// 		return 0;
+// 	}
 	return 0;
 }	
 
