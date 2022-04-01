@@ -136,11 +136,15 @@ static bool make_token(char *e) {
 }
 bool check_parentheses(char *str){
     int sta = 0, pos = 0;
+// 	printf("%s\n", str[pos]);
+	return 0;
 	while (pos != strlen(str)){
 		printf("**%d\n", strcmp(str + pos, "("));
-		if (strcmp(str + pos, "(") == 0)
+// 		if (strcmp(str + pos, "(") == 0)
+		if (str[pos] == (int)"(")
 			sta++, printf("*%d\n", sta);
-		else if (strcmp(str + pos, ")") == 0){
+// 		else if (strcmp(str + pos, "(") == 0){
+		else if (str[pos] == (int)")"){
 			sta--;
 			if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
 				return false;
