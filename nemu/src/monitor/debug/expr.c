@@ -139,7 +139,7 @@ bool check_parentheses(char *str){
 // 	printf("%s\n", str[pos]);
 // 	return 0;
 	while (pos != strlen(str)){
-		printf("**%d\n", strcmp(str + pos, "("));
+		printf("**%d\n", str[pos]);
 // 		if (strcmp(str + pos, "(") == 0)
 		if (str[pos] == (int)"(")
 			sta++, printf("*%d\n", sta);
