@@ -96,9 +96,8 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
+		int flag = 0;
         switch (rules[i].token_type) {
-         case TK_NOTYPE:
-			 tokens[nr_token].type = TK_NOTYPE;
          case TK_EQ:
 			 tokens[nr_token].type = TK_EQ;
          case TK_HEX:
@@ -119,9 +118,10 @@ static bool make_token(char *e) {
 			 tokens[nr_token].type = TIMES;
 		 case DIVIDE:
 			 tokens[nr_token].type = DIVIDE;
-         default: TODO();
+         default: flag = 1;
         }
-		strncpy(tokens[nr_token++].str, e + position, substr_len);
+		if (!flag)
+			strncpy(tokens[nr_token++].str, e + position, substr_len);
         break;
       }
     }
@@ -133,6 +133,22 @@ static bool make_token(char *e) {
   }
 
   return true;
+}
+bool check_parentheses(char *str){
+    int sta = 0, pos = 0;
+	while (pos != strlen(str)){
+		if (*(str + pos) == "(")
+			str++;
+		else if (*(str + pos) == ")"){
+			sta--;
+			if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0){
+				return false;
+			}
+		}
+		else
+			return true;
+		pos++;
+	}
 }
 
 uint32_t expr(char *e, bool *success) {
