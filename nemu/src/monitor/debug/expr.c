@@ -137,12 +137,11 @@ static bool make_token(char *e) {
 bool check_parentheses(char *str){
     int sta = 0, pos = 0;
 	while (pos != strlen(str)){
-		char ch = str[pos];
-		if (ch == '(')
+// 		char ch = str[pos];
+		if (str[pos] == '(')
 			sta++;
-		else if (ch == ')'){
+		else if (str[pos] == ')')
 			sta--;
-	    }
 		else if (pos == strlen(str) - 1 || pos == 0)
 			return false;
 		if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
