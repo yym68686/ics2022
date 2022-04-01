@@ -139,11 +139,12 @@ bool check_parentheses(char *str){
 	while (pos != strlen(str)){
 		if (strcmp(str + pos, "(") == 0)
 			sta++;
-		else if (strcmp(str + pos, ")") == 0)
+		else if (strcmp(str + pos, ")") == 0){
 			sta--;
+			if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
+				return false;
+	    }
 		else if (pos == strlen(str) - 1)
-			return false;
-		if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
 			return false;
 		pos++;
 	}
