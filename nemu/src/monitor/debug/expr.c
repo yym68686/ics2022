@@ -31,17 +31,17 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"0x\d+", TK_HEX},
-  {"\d+", TK_DEC},
-  {"\$e..", TK_REG},	
-  {"\(", LeftBracket},	
-  {"\)", RightBracket},	
-  {"\+", PLUS},         // plus
-  {"\-", MINUS},         
-  {"\*", TIMES},         
-  {"\/", DIVIDE},         
   {" +", TK_NOTYPE},    // spaces
-  {"==", TK_EQ}         // equal
+  {"==", TK_EQ},        // equal
+  {"0x\\d+", TK_HEX},
+  {"\\d+", TK_DEC},
+  {"\\$e..", TK_REG},	
+  {"\\(", LeftBracket},	
+  {"\\)", RightBracket},	
+  {"\\+", PLUS},         // plus
+  {"\\-", MINUS},         
+  {"\\*", TIMES},         
+  {"\\/", DIVIDE}         
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -108,20 +108,20 @@ static bool make_token(char *e) {
          case TK_REG:
 			 tokens[nr_token].type = TK_REG;
          case LeftBracket:
-			 tokens[nr_token].type = TK_LeftBracket;
+			 tokens[nr_token].type = LeftBracket;
          case RightBracket:
-			 tokens[nr_token].type = TK_RightBracket;
+			 tokens[nr_token].type = RightBracket;
          case PLUS:
-			 tokens[nr_token].type = TK_PLUS;
+			 tokens[nr_token].type = PLUS;
          case MINUS:
-			 tokens[nr_token].type = TK_MINUS;
+			 tokens[nr_token].type = MINUS;
          case TIMES:
-			 tokens[nr_token].type = TK_TIMES;
+			 tokens[nr_token].type = TIMES;
 		 case DIVIDE:
-			 tokens[nr_token].type = TK_DIVIDE;
+			 tokens[nr_token].type = DIVIDE;
          default: TODO();
         }
-		strncpy(tokens[nr_token++].str, e + substr_start, substr_len);
+		strncpy(tokens[nr_token++].str, e + position, substr_len);
         break;
       }
     }
