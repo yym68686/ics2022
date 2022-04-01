@@ -101,6 +101,7 @@ static int cmd_p(char *args){
 // 		puts("Missing parameter.");
 // 		return 0;
 // 	}
+    printf("%d\n", check_parentheses("(2 - 1)"));
 	return 0;
 }	
 

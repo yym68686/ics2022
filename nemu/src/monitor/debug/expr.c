@@ -137,18 +137,17 @@ static bool make_token(char *e) {
 bool check_parentheses(char *str){
     int sta = 0, pos = 0;
 	while (pos != strlen(str)){
-		if (*(str + pos) == "(")
+		if (strcmp(str + pos, "(") == 0)
 			str++;
-		else if (*(str + pos) == ")"){
+		else if (strcmp(str + pos, ")") == 0)
 			sta--;
-			if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0){
-				return false;
-			}
-		}
-		else
-			return true;
+		else if (pos == strlen(str) - 1)
+			return false;
+		if ((sta <= 0 && pos != strlen(str) - 1) || sta < 0)
+			return false;
 		pos++;
 	}
+	return true;
 }
 
 uint32_t expr(char *e, bool *success) {
