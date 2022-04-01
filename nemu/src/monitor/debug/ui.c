@@ -95,6 +95,14 @@ static int cmd_x(char *args){
     }
 	return 0;
 }
+static int cmd_p(char *args){
+    char *arg1 = strtok(NULL, " ");
+	if (arg1 == NULL){
+		puts("Missing parameter.");
+		return 0;
+	}
+	
+}	
 
 static struct {
   char *name;
@@ -107,6 +115,7 @@ static struct {
   { "si", "Single step execution", cmd_si },
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
+  { "p", "Expression evaluation", cmd_p },
 
   /* TODO: Add more commands */
 

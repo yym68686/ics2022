@@ -7,7 +7,17 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_HEX, TK_DEC, TK_REG, LeftBracket, RightBracket
+  TK_NOTYPE = 256,
+  TK_EQ,
+  TK_HEX,
+  TK_DEC,
+  TK_REG,
+  LeftBracket,
+  RightBracket,
+  PLUS,
+  MINUS,
+  TIMES,
+  DIVIDE
 
   /* TODO: Add more token types */
 
@@ -26,10 +36,10 @@ static struct rule {
   {"\$e..", TK_REG},	
   {"\(", LeftBracket},	
   {"\)", RightBracket},	
-  {"\+", '+'},         // plus
-  {"\-", '-'},         
-  {"\*", '*'},         
-  {"\/", '/'},         
+  {"\+", PLUS},         // plus
+  {"\-", MINUS},         
+  {"\*", TIMES},         
+  {"\/", DIVIDE},         
   {" +", TK_NOTYPE},    // spaces
   {"==", TK_EQ}         // equal
 };
@@ -87,7 +97,18 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+         case TK_NOTYPE:
+         case TK_EQ:
+         case TK_HEX:
+         case TK_DEC:
+         case TK_REG:
+         case LeftBracket:
+         case RightBracket:
+         case PLUS:
+         case MINUS:
+         case TIMES:
+		 case DIVIDE:
+         default: TODO();
         }
 
         break;
