@@ -31,10 +31,10 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"[1-9][0-9]*", TK_DEC},
   {" +", TK_NOTYPE},    // spaces
   {"==", TK_EQ},        // equal
   {"0x\\d+", TK_HEX},
+  {"[1-9][0-9]*", TK_DEC},
   {"\\$e..", TK_REG},	
   {"\\(", LeftBracket},	
   {"\\)", RightBracket},	
