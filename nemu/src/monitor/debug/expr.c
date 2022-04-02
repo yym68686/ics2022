@@ -130,8 +130,14 @@ static bool make_token(char *e) {
 			 break;
          default: flag = 1;
         }
-		if (flag == 0)
+		if (flag == 0){
 			strncpy(tokens[nr_token++].str, e + position, substr_len);
+			for (int j = 0; j < nr_token; j++){
+				printf("%s ", tokens[j].str);
+			}
+			puts("");
+
+		}
         break;
       }
     }
