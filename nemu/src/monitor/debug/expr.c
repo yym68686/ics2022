@@ -32,9 +32,9 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
   {" +", TK_NOTYPE},    // spaces
+  {"\\d+", TK_DEC},
   {"==", TK_EQ},        // equal
   {"0x\\d+", TK_HEX},
-  {"\\d", TK_DEC},
   {"\\$e..", TK_REG},	
   {"\\(", LeftBracket},	
   {"\\)", RightBracket},	
