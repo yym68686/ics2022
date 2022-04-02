@@ -153,8 +153,9 @@ bool check_parentheses(int p, int q){
 			sta--;
 		else if (p + pos == q || pos == 0)
 			return false;
-		if (((p + pos++) != q && sta <= 0) || sta < 0)
+		if (((p + pos) != q && sta <= 0) || sta < 0)
 			return false;
+		pos++;
 	}
 	return true;
 }
