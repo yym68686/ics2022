@@ -120,7 +120,8 @@ static bool make_token(char *e) {
 			 tokens[nr_token].type = DIVIDE;
          default: flag = 1;
         }
-		if (!flag)
+		printf("flag:%d\n", flag);
+		if (flag == 0)
 			strncpy(tokens[nr_token++].str, e + position, substr_len), printf("nr_token:%d\n", nr_token);
         break;
       }
