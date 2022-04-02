@@ -190,10 +190,6 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   printf("%d\n", check_parentheses(0, nr_token - 1));
-//    printf("%d\n", check_parentheses("(4 + 3 * (2 - 1))"));
-//    printf("%d\n", check_parentheses("4 + 3 * (2 - 1)"));
-//    printf("%d\n", check_parentheses("(4 + 3)) * ((2 - 1)"));
-//    printf("%d\n", check_parentheses("(4 + 3) * (2 - 1)"));
   /* TODO: Insert codes to evaluate the expression. */
 //   TODO();
 
