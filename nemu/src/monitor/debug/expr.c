@@ -185,7 +185,7 @@ uint32_t expr(char *e, bool *success) {
 //    printf("%d\n", check_parentheses("(4 + 3)) * ((2 - 1)"));
 //    printf("%d\n", check_parentheses("(4 + 3) * (2 - 1)"));
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+//   TODO();
 
   return 0;
 }
