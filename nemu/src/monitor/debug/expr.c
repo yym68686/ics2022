@@ -100,24 +100,34 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
          case TK_EQ:
 			 tokens[nr_token].type = TK_EQ;
+			 break;
          case TK_HEX:
 			 tokens[nr_token].type = TK_HEX;
+			 break;
          case TK_DEC:
 			 tokens[nr_token].type = TK_DEC;
+			 break;
          case TK_REG:
 			 tokens[nr_token].type = TK_REG;
+			 break;
          case LeftBracket:
 			 tokens[nr_token].type = LeftBracket;
+			 break;
          case RightBracket:
 			 tokens[nr_token].type = RightBracket;
+			 break;
          case PLUS:
 			 tokens[nr_token].type = PLUS;
+			 break;
          case MINUS:
 			 tokens[nr_token].type = MINUS;
+			 break;
          case TIMES:
 			 tokens[nr_token].type = TIMES;
+			 break;
 		 case DIVIDE:
 			 tokens[nr_token].type = DIVIDE;
+			 break;
          default: flag = 1;
         }
 		printf("flag:%d\n", flag);
