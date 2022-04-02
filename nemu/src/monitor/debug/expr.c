@@ -133,7 +133,7 @@ static bool make_token(char *e) {
 		if (flag == 0){
 			strncpy(tokens[nr_token++].str, e + position, substr_len);
 			for (int j = 0; j < nr_token; j++){
-				printf("%s ", tokens[j].str);
+				printf("|%s| ", tokens[j].str);
 			}
 			puts("");
 
