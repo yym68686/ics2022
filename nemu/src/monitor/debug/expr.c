@@ -130,9 +130,8 @@ static bool make_token(char *e) {
 			 break;
          default: flag = 1;
         }
-		printf("flag:%d\n", flag);
 		if (flag == 0)
-			strncpy(tokens[nr_token++].str, e + position, substr_len), printf("nr_token:%d\n", nr_token);
+			strncpy(tokens[nr_token++].str, e + position, substr_len);
         break;
       }
     }
@@ -147,9 +146,7 @@ static bool make_token(char *e) {
 }
 bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
-	printf("%d %d\n", p + pos, q + 1);
 	while (p + pos != q + 1){
-		printf("**%d ", sta);
 		if (strcmp(tokens[p + pos].str, "(") == 0)
 			sta++;
 		else if (strcmp(tokens[p + pos].str, ")") == 0)
@@ -191,7 +188,6 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("nr_token:%d\n", nr_token);
   printf("%d\n", check_parentheses(0, nr_token - 1));
 //    printf("%d\n", check_parentheses("(4 + 3 * (2 - 1))"));
 //    printf("%d\n", check_parentheses("4 + 3 * (2 - 1)"));
