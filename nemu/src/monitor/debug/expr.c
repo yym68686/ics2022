@@ -180,6 +180,7 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+  printf("nr_token:%d\n", nr_token);
   printf("%d\n", check_parentheses(0, nr_token - 1));
 //    printf("%d\n", check_parentheses("(4 + 3 * (2 - 1))"));
 //    printf("%d\n", check_parentheses("4 + 3 * (2 - 1)"));
