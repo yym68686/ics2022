@@ -134,27 +134,55 @@ static bool make_token(char *e) {
 
   return true;
 }
-bool check_parentheses(char *str){
+bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
-	while (pos != strlen(str)){
-		if (str[pos] == '(')
+	while (p + pos != q + 1){
+		if (strcmp(tokens[p + pos].str, "(") == 0)
 			sta++;
-		else if (str[pos] == ')')
+		else if (strcmp(tokens[p + pos].str, ")") == 0)
 			sta--;
-		else if (pos == strlen(str) - 1 || pos == 0)
+		else if (p + pos == q || pos == 0)
 			return false;
-		if ((pos++ != strlen(str) - 1 && sta <= 0) || sta < 0)
+		if (((p + pos++) != q && sta <= 0) || sta < 0)
 			return false;
 	}
 	return true;
 }
 
+uint32_t eval(int p, int q) {
+    if (p > q) {
+        /* Bad expression */
+    }
+    else if (p == q) {
+        /* Single token.
+        * For now this token should be a number.
+        * Return the value of the number.
+        */
+    }
+    else if (check_parentheses(p, q) == true) {
+        /* The expression is surrounded by a matched pair of parentheses.
+        * If that is the case, just throw away the parentheses.
+        */
+        return eval(p + 1, q - 1);
+    }
+    else {
+        /* We should do more things here. */
+    }
+	return 0;
+}
+// find_dominated_op(int p, int q){
+
+// }
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-
+  printf("%d\n", check_parentheses(0, nr_token - 1));
+//    printf("%d\n", check_parentheses("(4 + 3 * (2 - 1))"));
+//    printf("%d\n", check_parentheses("4 + 3 * (2 - 1)"));
+//    printf("%d\n", check_parentheses("(4 + 3)) * ((2 - 1)"));
+//    printf("%d\n", check_parentheses("(4 + 3) * (2 - 1)"));
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
