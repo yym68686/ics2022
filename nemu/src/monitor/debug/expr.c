@@ -34,7 +34,7 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"==", TK_EQ},        // equal
   {"0x\\d+", TK_HEX},
-  {"d+", TK_DEC},
+  {"\\d+", TK_DEC},
   {"\\$e..", TK_REG},	
   {"\\(", LeftBracket},	
   {"\\)", RightBracket},	
