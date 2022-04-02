@@ -31,8 +31,8 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {" +", TK_NOTYPE},    // spaces
   {"\\d+", TK_DEC},
+  {" +", TK_NOTYPE},    // spaces
   {"==", TK_EQ},        // equal
   {"0x\\d+", TK_HEX},
   {"\\$e..", TK_REG},	
