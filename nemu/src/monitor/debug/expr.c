@@ -129,16 +129,8 @@ static bool make_token(char *e) {
 			 break;
          default: flag = 1;
         }
-		if (flag == 0){
+		if (flag == 0)
 			strncpy(tokens[nr_token++].str, e + position, substr_len);
-			printf("%d %d |%s|\n", position, substr_len, tokens[nr_token - 1].str);
-
-// 			for (int j = 0; j < nr_token; j++){
-// 				printf("|%s| ", tokens[j].str);
-// 			}
-// 			puts("");
-
-		}
         position += substr_len;
         break;
       }
@@ -155,9 +147,8 @@ static bool make_token(char *e) {
 bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
 	while (p + pos != q + 1){
-		printf("strcmp:%s %d\n", tokens[p + pos].str, strcmp(tokens[p + pos].str, "("));
 		if (strcmp(tokens[p + pos].str, "(") == 0)
-			sta++, puts("yes");
+			sta++;
 		else if (strcmp(tokens[p + pos].str, ")") == 0)
 			sta--;
 		else if (p + pos == q || pos == 0)
