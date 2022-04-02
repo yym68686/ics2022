@@ -36,7 +36,7 @@ static struct rule {
   {"0x\\d+", TK_HEX},
   {"\\d+", TK_DEC},
   {"\\$e..", TK_REG},	
-  {"\\(", LeftBracket},	
+  {"(", LeftBracket},	
   {"\\)", RightBracket},	
   {"\\+", PLUS},         // plus
   {"\\-", MINUS},         
