@@ -121,7 +121,7 @@ static bool make_token(char *e) {
          default: flag = 1;
         }
 		if (!flag)
-			strncpy(tokens[nr_token++].str, e + position, substr_len);
+			strncpy(tokens[nr_token++].str, e + position, substr_len), printf("nr_token:%d\n", nr_token);
         break;
       }
     }
@@ -132,7 +132,6 @@ static bool make_token(char *e) {
     }
   }
 
-  printf("nr_token:%d\n", nr_token);
   return true;
 }
 bool check_parentheses(int p, int q){
