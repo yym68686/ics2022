@@ -164,7 +164,7 @@ bool check_parentheses(int p, int q){
 				if (i < p + pos)
 					len += strlen(tokens[i].str);
 			}
-			printf("\n%*c", len, '^');
+			printf("\n%*c\n", len, '^');
 			exit(0);
 		}
 		pos++;
@@ -181,7 +181,7 @@ uint32_t eval(int p, int q) {
 // 			if (i < p + pos)
 // 				len += strlen(tokens[i].str);
 		}
-		printf("\n%*c", len, '^');
+		printf("\n%*c\n", len, '^');
 		exit(0);
 // 		assert(0);
         /* Bad expression */
