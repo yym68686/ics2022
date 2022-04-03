@@ -168,7 +168,14 @@ int check_error(int p, int q){
 		else if (tokens[p + pos].str[0] == ')'){
 			puts("**");
 			sta--;
-			if (sta < 0){
+			if (sta < 0 || (p + pos == q && sta != 0)){
+				printf("Invalid expression: ");
+				int len = 0;
+				for (int i = 0; i < nr_token; i++){
+					printf("%s", tokens[i].str);
+					len += strlen(tokens[i].str);
+				}
+				printf("\n%*c\n", len + 20, ' ');
 				return 0;
 			}
 		}
