@@ -190,7 +190,7 @@ int find_dominated_op(int p, int q){
 			stack--;
 		else if ((tokens[pos].str[0] == '+' || tokens[pos].str[0] == '-') && !stack)
 			return pos;
-		pos++;
+		pos--;
 	}
 	pos = q, stack = 0;
 	while (pos != p){
@@ -200,7 +200,7 @@ int find_dominated_op(int p, int q){
 			stack--;
 		else if ((tokens[pos].str[0] == '*' || tokens[pos].str[0] == '/') && !stack)
 			return pos;
-		pos++;
+		pos--;
 	}
 	return 0;
 }
