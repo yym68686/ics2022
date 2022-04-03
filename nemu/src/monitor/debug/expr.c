@@ -158,7 +158,7 @@ bool check_parentheses(int p, int q){
 			return false;
 		if (((p + pos) != q && sta == 0))
 			return false;
-		if (sta < 0 || (sta > 0 && pos + p == q)){
+		if (sta < 0 || (sta > 0 && pos + p == nr_token - 1)){
 			int len = 21;
 			printf("*Invalid expression: ");
 			for (int i = 0; i < nr_token; i++){
