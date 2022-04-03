@@ -163,6 +163,7 @@ bool check_parentheses(int p, int q){
 int find_dominated_op(int p, int q);
 uint32_t eval(int p, int q) {
     if (p > q) {
+		assert(0);
         /* Bad expression */
     }
     else if (p == q) {
