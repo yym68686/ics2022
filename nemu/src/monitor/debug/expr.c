@@ -164,6 +164,7 @@ int check_error(int p, int q){
 	while (p + pos != q + 1){
 		if (tokens[p + pos].str[0] == '(') sta++;
 		else if (tokens[p + pos].str[0] == ')'){
+			puts("**");
 			sta--;
 			if (sta < 0){
 				return 0;
