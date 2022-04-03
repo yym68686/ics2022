@@ -160,7 +160,7 @@ bool check_parentheses(int p, int q){
 			int len = 20;
 			printf("Invalid expression: ");
 			for (int i = 0; i < nr_token; i++){
-				printf("%s ", tokens[i].str);
+				printf("%s", tokens[i].str);
 				if (i < p + pos)
 					len += strlen(tokens[i].str);
 			}
@@ -177,7 +177,7 @@ uint32_t eval(int p, int q) {
 		int len = 20 + p;
 		printf("Invalid expression: ");
 		for (int i = 0; i < nr_token; i++){
-			printf("%s ", tokens[i].str);
+			printf("%s", tokens[i].str);
 // 			if (i < p + pos)
 // 				len += strlen(tokens[i].str);
 		}
