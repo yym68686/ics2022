@@ -5,6 +5,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
   TK_NOTYPE = 256,
@@ -159,12 +160,14 @@ bool check_parentheses(int p, int q){
 	}
 	return true;
 }
-
+int find_dominated_op(int p, int q);
 uint32_t eval(int p, int q) {
     if (p > q) {
         /* Bad expression */
     }
     else if (p == q) {
+		if (tokens[p].type == TK_DEC)
+			return atoi(tokens[p].str);
         /* Single token.
         * For now this token should be a number.
         * Return the value of the number.
@@ -178,14 +181,15 @@ uint32_t eval(int p, int q) {
     }
     else {
 		int op = find_dominated_op(p, q);
-        val1 = eval(p, op - 1);
-        val2 = eval(op + 1, q);
+        int val1 = eval(p, op - 1);
+        int val2 = eval(op + 1, q);
         switch (tokens[op].type) {
             case '+': return val1 + val2;
-            case '-': /* ... */
-            case '*': /* ... */
-            case '/': /* ... */
+            case '-': return val1 - val2;
+            case '*': return val1 * val2;
+            case '/': return val1 / val2;
             default: assert(0);
+		}
         /* We should do more things here. */
     }
 	return 0;
