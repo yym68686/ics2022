@@ -163,6 +163,7 @@ int check_error(int p, int q){
 	puts("i");
     int sta = 0, pos = 0;
 	while (p + pos != q + 1){
+		printf("**%d %d %d\n", p + pos, q, sta);
 		if (tokens[p + pos].str[0] == '(') sta++;
 		else if (tokens[p + pos].str[0] == ')'){
 			puts("**");
