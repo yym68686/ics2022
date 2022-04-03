@@ -182,6 +182,7 @@ uint32_t eval(int p, int q) {
 // 				len += strlen(tokens[i].str);
 		}
 		printf("\n%*c", len, '^');
+		exit(0);
 // 		assert(0);
         /* Bad expression */
     }
