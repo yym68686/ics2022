@@ -208,9 +208,9 @@ uint32_t eval(int p, int q) {
             case '-': return val1 - val2;
             case '*': return val1 * val2;
             case '/': return val1 / val2;
-            default: 
-				printf("Invalid expression: ");
-				exit(0);
+//             default: 
+// 				printf("Invalid expression: ");
+// 				exit(0);
 // 				assert(0);
 		}
     }
