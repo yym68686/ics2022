@@ -154,8 +154,19 @@ bool check_parentheses(int p, int q){
 			sta--;
 		else if (p + pos == q || pos == 0)
 			return false;
-		if (((p + pos) != q && sta <= 0) || sta < 0)
+		if (((p + pos) != q && sta == 0))
 			return false;
+		if (sta < 0){
+			int len = 20;
+			printf("Invalid expression: ");
+			for (int i = 0; i < nr_token; i++){
+				printf("%s ", tokens[i].str);
+				if (i < p + pos)
+					len += strlen(tokens[i].str);
+			}
+			printf("%*c", len, '^');
+			exit(0);
+		}
 		pos++;
 	}
 	return true;
