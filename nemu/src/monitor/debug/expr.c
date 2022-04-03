@@ -175,7 +175,7 @@ int find_dominated_op(int p, int q);
 uint32_t eval(int p, int q) {
     if (p > q) {
 		int len = 21 + p;
-		printf("Invalid expression: ");
+// 		printf("Invalid expression: ");
 		for (int i = 0; i < nr_token; i++){
 			printf("%s", tokens[i].str);
 // 			if (i < p + pos)
