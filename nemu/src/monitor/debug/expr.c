@@ -159,6 +159,7 @@ bool check_parentheses(int p, int q){
 }
 int find_dominated_op(int p, int q);
 int check_error(int p, int q){
+	puts("i");
     int sta = 0, pos = 0;
 	while (p + pos != q + 1){
 		if (tokens[p + pos].str[0] == '(') sta++;
