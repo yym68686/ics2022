@@ -147,6 +147,7 @@ static bool make_token(char *e) {
 }
 bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
+	puts("***");
 	while (p + pos != q + 1){
 		if (tokens[p + pos].str[0] == '(')
 			sta++;
