@@ -148,10 +148,8 @@ static bool make_token(char *e) {
 bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
 	while (p + pos != q + 1){
-		if (tokens[p + pos].str[0] == '(')
-			sta++;
-		else if (tokens[p + pos].str[0] == ')')
-			sta--;
+		if (tokens[p + pos].str[0] == '(') sta++;
+		else if (tokens[p + pos].str[0] == ')') sta--;
 		else if (p + pos == q || pos == 0)
 			return false;
 		if (((p + pos++) != q && sta <= 0) || sta < 0)
@@ -160,7 +158,31 @@ bool check_parentheses(int p, int q){
 	return true;
 }
 int find_dominated_op(int p, int q);
+int check_error(int p, int q){
+    int sta = 0, pos = 0;
+	while (p + pos != q + 1){
+		if (tokens[p + pos].str[0] == '(') sta++;
+		else if (tokens[p + pos].str[0] == ')'){
+			sta--;
+			if (sta < 0){
+				return 0;
+			}
+		}
+		else if (p + pos == q && sta != 0){
+			printf("Invalid expression: ");
+			int len = 0;
+			for (int i = 0; i < nr_token; i++){
+				printf("%s", tokens[i].str);
+				len += strlen(tokens[i].str);
+			}
+			printf("\n%*c\n", len + 20, ' ');
+			return 0;
+		}
+	}
+	return 1;
+}
 uint32_t eval(int p, int q) {
+	if (!check_error(0, nr_token - 1)) return 0;
     if (p > q) {
 		assert(0);
         /* Bad expression */
