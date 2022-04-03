@@ -147,7 +147,8 @@ static bool make_token(char *e) {
 bool check_parentheses(int p, int q){
     int sta = 0, pos = 0;
 	while (p + pos != q + 1){
-		if (strcmp(tokens[p + pos].str, "(") == 0)
+		if (tokens[p + pos].str[0] == '(')
+// 		if (strcmp(tokens[p + pos].str, "(") == 0)
 			sta++;
 		else if (strcmp(tokens[p + pos].str, ")") == 0)
 			sta--;
@@ -181,9 +182,11 @@ uint32_t eval(int p, int q) {
     }
 	return 0;
 }
-// find_dominated_op(int p, int q){
-
-// }
+int find_dominated_op(int p, int q){
+// 	int pos = q, stack = 0;
+// 	while (tokens[pos].str)
+	return 0;
+}
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
