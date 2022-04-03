@@ -190,7 +190,6 @@ int check_error(int p, int q){
 	return 1;
 }
 uint32_t eval(int p, int q) {
-	if (!check_error(0, nr_token - 1)) return 0;
     if (p > q) {
 		assert(0);
         /* Bad expression */
@@ -251,8 +250,8 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-//   printf("%d\n", check_parentheses(0, nr_token - 1));
-//   printf("%d\n", find_dominated_op(0, nr_token - 1));
+  if (!check_error(0, nr_token - 1)) success = false;
+
   /* TODO: Insert codes to evaluate the expression. */
 //   TODO();
 
