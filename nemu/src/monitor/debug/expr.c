@@ -178,6 +178,7 @@ int check_error(int p, int q){
 			printf("\n%*c\n", len + 20, ' ');
 			return 0;
 		}
+		pos++;
 	}
 	return 1;
 }
