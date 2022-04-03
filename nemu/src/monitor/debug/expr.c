@@ -157,7 +157,7 @@ bool check_parentheses(int p, int q){
 		if (((p + pos) != q && sta == 0))
 			return false;
 		if (sta < 0){
-			int len = 20;
+			int len = 21;
 			printf("Invalid expression: ");
 			for (int i = 0; i < nr_token; i++){
 				printf("%s", tokens[i].str);
@@ -174,7 +174,7 @@ bool check_parentheses(int p, int q){
 int find_dominated_op(int p, int q);
 uint32_t eval(int p, int q) {
     if (p > q) {
-		int len = 20 + p;
+		int len = 21 + p;
 		printf("Invalid expression: ");
 		for (int i = 0; i < nr_token; i++){
 			printf("%s", tokens[i].str);
