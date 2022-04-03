@@ -129,7 +129,7 @@ static bool make_token(char *e) {
 			 break;
          default: flag = 1;
         }
-		if (flag == 0)
+		if (!flag)
 			strncpy(tokens[nr_token++].str, e + position, substr_len);
         position += substr_len;
         break;
@@ -182,8 +182,26 @@ uint32_t eval(int p, int q) {
 	return 0;
 }
 int find_dominated_op(int p, int q){
-// 	int pos = q, stack = 0;
-// 	while (tokens[pos].str)
+	int pos = q, stack = 0;
+	while (pos != p){
+		if(tokens[pos].str[0] == ')')
+			stack++;
+		else if (tokens[pos].str[0] == '(')
+			stack--;
+		else if ((tokens[pos].str[0] == '+' || tokens[pos].str[0] == '-') && !stack)
+			return pos;
+		pos++;
+	}
+	pos = q, stack = 0;
+	while (pos != p){
+		if(tokens[pos].str[0] == ')')
+			stack++;
+		else if (tokens[pos].str[0] == '(')
+			stack--;
+		else if ((tokens[pos].str[0] == '*' || tokens[pos].str[0] == '/') && !stack)
+			return pos;
+		pos++;
+	}
 	return 0;
 }
 uint32_t expr(char *e, bool *success) {
@@ -192,6 +210,7 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   printf("%d\n", check_parentheses(0, nr_token - 1));
+  printf("%d\n", find_dominated_op(0, nr_token - 1));
   /* TODO: Insert codes to evaluate the expression. */
 //   TODO();
 
