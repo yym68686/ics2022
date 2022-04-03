@@ -177,6 +177,15 @@ uint32_t eval(int p, int q) {
         return eval(p + 1, q - 1);
     }
     else {
+		int op = find_dominated_op(p, q);
+        val1 = eval(p, op - 1);
+        val2 = eval(op + 1, q);
+        switch (tokens[op].type) {
+            case '+': return val1 + val2;
+            case '-': /* ... */
+            case '*': /* ... */
+            case '/': /* ... */
+            default: assert(0);
         /* We should do more things here. */
     }
 	return 0;
