@@ -191,7 +191,6 @@ uint32_t eval(int p, int q) {
             case '/': return val1 / val2;
             default: assert(0);
 		}
-        /* We should do more things here. */
     }
 	return 0;
 }
