@@ -39,7 +39,7 @@ static struct rule {
   {"==", TK_EQ},        // equal
   {"!=", TK_NEQ},       // not equal
   {"&&", TK_AND},       // not equal
-  {"||", TK_OR},       // not equal
+  {"\\|\\|", TK_OR},       // not equal
   {"0x\\d+", TK_HEX},
   {"[1-9][0-9]*|0", TK_DEC},
   {"\\$e..", TK_REG},	
