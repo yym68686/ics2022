@@ -172,7 +172,7 @@ int check_error(int p, int q){
 					if (i < pos)
 						len += strlen(tokens[i].str);
 				}
-				printf("\n%*c\n", len + 20, '^');
+				printf("\n%*c\n", len + 21, '^');
 				return 0;
 			}
 		}
@@ -183,7 +183,7 @@ int check_error(int p, int q){
 				printf("%s", tokens[i].str);
 				len += strlen(tokens[i].str);
 			}
-			printf("\n%*c\n", len + 20, '^');
+			printf("\n%*c\n", len + 21, '^');
 			return 0;
 		}
 		pos++;
