@@ -200,7 +200,8 @@ uint32_t eval(int p, int q) {
 				len += strlen(tokens[i].str);
 		}
 		printf("\n%*c\n", len + 21, '^');
-		assert(0);
+		return 0x3f3f3f3f;
+// 		assert(0);
         /* Bad expression */
     }
     else if (p == q) {
