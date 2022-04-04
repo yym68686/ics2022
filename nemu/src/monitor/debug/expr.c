@@ -13,6 +13,7 @@ enum {
   TK_NEQ,
   TK_AND,
   TK_OR,
+  TK_NOT,
   TK_HEX,
   TK_DEC,
   TK_REG,
@@ -40,6 +41,7 @@ static struct rule {
   {"!=", TK_NEQ},       // not equal
   {"&&", TK_AND},       // not equal
   {"\\|\\|", TK_OR},       // not equal
+  {"!", TK_NOT},       // not equal
   {"0x\\d+", TK_HEX},
   {"[1-9][0-9]*|0", TK_DEC},
   {"\\$e..", TK_REG},	
@@ -115,6 +117,9 @@ static bool make_token(char *e) {
 			 break;
          case TK_OR:
 			 tokens[nr_token].type = TK_OR;
+			 break;
+         case TK_NOT:
+			 tokens[nr_token].type = TK_NOT;
 			 break;
          case TK_HEX:
 			 tokens[nr_token].type = TK_HEX;
@@ -241,6 +246,7 @@ uint32_t eval(int p, int q) {
 			case TK_NEQ: return val1 != val2;
 			case TK_AND: return val1 && val2;
 			case TK_OR: return val1 || val2;
+			case TK_NOT: return !val2;
             case PLUS: return val1 + val2;
             case MINUS: return val1 - val2;
             case TIMES: return val1 * val2;
@@ -262,6 +268,7 @@ int find_dominated_op(int p, int q){
 			   || !strcmp(tokens[pos].str, "==") \
 			   || !strcmp(tokens[pos].str, "!=") \
 			   || !strcmp(tokens[pos].str, "||") \
+			   || !strcmp(tokens[pos].str, "!") \
 			   || !strcmp(tokens[pos].str, "&&"))\
 			   && !stack)
 			return pos;
