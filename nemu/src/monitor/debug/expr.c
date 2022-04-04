@@ -192,7 +192,8 @@ int check_error(int p, int q){
 }
 uint32_t eval(int p, int q) {
     if (p > q) {
-		printf("Invalid expression: ");
+        /* Bad expression */
+		printf("1Invalid expression: ");
 		int len = 0;
 		for (int i = 0; i < nr_token; i++){
 			printf("%s", tokens[i].str);
@@ -200,9 +201,7 @@ uint32_t eval(int p, int q) {
 				len += strlen(tokens[i].str);
 		}
 		printf("\n%*c\n", len + 21, '^');
-// 		*success = false;
 		return 0x3f3f3f3f;
-        /* Bad expression */
     }
     else if (p == q) {
 		if (tokens[p].type == TK_DEC)
