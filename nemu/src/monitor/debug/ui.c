@@ -98,7 +98,7 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
 	bool success = true;
 	uint32_t result = expr(args, &success);
-	if (success == true && result != 0x3f3f3f3f)
+	if (success == true && result != -1162167624)
 		printf("%d\n", result);
 	return 0;
 }	
