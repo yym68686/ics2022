@@ -39,7 +39,7 @@ static struct rule {
   {"!=", TK_NEQ},       // not equal
   {"&&", TK_AND},       // not equal
   {"0x\\d+", TK_HEX},
-  {"[1-9][0-9]*", TK_DEC},
+  {"[1-9][0-9]*|0", TK_DEC},
   {"\\$e..", TK_REG},	
   {"\\(", LeftBracket},	
   {"\\)", RightBracket},	
