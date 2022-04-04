@@ -97,7 +97,7 @@ static int cmd_x(char *args){
 }
 static int cmd_p(char *args){
 	bool *success = 0;
-// 	*success = true;
+	*success = true;
 	int result = expr(args, success);
 	if (success == false)
 		printf("%d\n", result);
