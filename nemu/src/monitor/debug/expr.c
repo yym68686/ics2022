@@ -193,7 +193,7 @@ int check_error(int p, int q){
 uint32_t eval(int p, int q) {
     if (p > q) {
         /* Bad expression */
-		printf("1Invalid expression: ");
+		printf("Invalid expression: ");
 		int len = 0;
 		for (int i = 0; i < nr_token; i++){
 			printf("%s", tokens[i].str);
@@ -219,14 +219,15 @@ uint32_t eval(int p, int q) {
     }
     else {
 		int op = find_dominated_op(p, q);
+		printf("*%d\n", op);
         int val1 = eval(p, op - 1);
         int val2 = eval(op + 1, q);
         switch (tokens[op].type) {
+			case TK_EQ: return val1 == val2;
             case PLUS: return val1 + val2;
             case MINUS: return val1 - val2;
             case TIMES: return val1 * val2;
             case DIVIDE: return val1 / val2;
-			case TK_EQ: return val1 == val2;
             default: assert(0);
 		}
     }
