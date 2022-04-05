@@ -244,7 +244,7 @@ uint32_t eval(int p, int q) {
 		if (tokens[op].type != TK_NOT)
 			val1 = eval(p, op - 1);
 // 		if (tokens[op].type != DEREF)
-			val2 = eval(op + 1, q);
+		val2 = eval(op + 1, q);
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
 			case TK_NEQ: return val1 != val2;
