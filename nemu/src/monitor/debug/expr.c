@@ -17,6 +17,7 @@ enum {
   TK_HEX,
   TK_DEC,
   TK_REG,
+  DEREF,
   LeftBracket,
   RightBracket,
   PLUS,
@@ -282,7 +283,7 @@ int find_dominated_op(int p, int q){
 			stack++;
 		else if (tokens[pos].str[0] == '(')
 			stack--;
-		else if ((tokens[pos].str[0] == '*' || tokens[pos].str[0] == '/') && !stack)
+		else if ((tokens[pos].type == TIMES || tokens[pos].str[0] == '/') && !stack)
 			return pos;
 		pos--;
 	}
@@ -292,6 +293,16 @@ uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
+  }
+  for (int i = 0; i < nr_token; i++) {
+	if (tokens[i].type == '*' && (i == 0 \
+				|| tokens[i - 1].type == DIVIDE \
+				|| tokens[i - 1].type == LeftBracket \
+				|| tokens[i - 1].type == PLUS \
+				|| tokens[i - 1].type == MINUS \
+				|| tokens[i - 1].type == TIMES) ) {
+	  tokens[i].type = DEREF;
+	}
   }
   if (!check_error(0, nr_token - 1)) {
 	  *success = false;
