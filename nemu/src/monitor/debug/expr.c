@@ -214,7 +214,7 @@ int check_error(int p, int q){
 uint32_t eval(int p, int q) {
     if (p > q) {
         /* Bad expression */
-		printf("*Invalid expression: ");
+		printf("Invalid expression: ");
 		int len = 0;
 		for (int i = 0; i < nr_token; i++){
 			printf("%s", tokens[i].str);
@@ -241,7 +241,7 @@ uint32_t eval(int p, int q) {
     else {
 		int op = find_dominated_op(p, q);
 		int val1 = 0, val2 = 0;
-		if (tokens[op].type != TK_NOT)
+		if (tokens[op].type != TK_NOT || tokens[op].type != DEREF)
 			val1 = eval(p, op - 1);
 // 		if (tokens[op].type != DEREF)
 		val2 = eval(op + 1, q);
