@@ -282,8 +282,7 @@ int find_dominated_op(int p, int q){
 			stack++;
 		else if (tokens[pos].str[0] == '(')
 			stack--;
-// 		else if ((tokens[pos].str[0] == '*' || tokens[pos].str[0] == '/') && !stack)
-		else if ((tokens[pos].str[0] == ('*' || '/')) && !stack)
+		else if ((tokens[pos].str[0] == '*' || tokens[pos].str[0] == '/') && !stack)
 			return pos;
 		pos--;
 	}
