@@ -240,16 +240,18 @@ uint32_t eval(int p, int q) {
     }
     else {
 		int op = find_dominated_op(p, q);
-		int val1 = 0;
+		int val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT)
 			val1 = eval(p, op - 1);
-        int val2 = eval(op + 1, q);
+// 		if (tokens[op].type != DEREF)
+			val2 = eval(op + 1, q);
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
 			case TK_NEQ: return val1 != val2;
 			case TK_AND: return val1 && val2;
 			case TK_OR: return val1 || val2;
 			case TK_NOT: return !val2;
+			case DEREF: return vaddr_read(val2, 4);
             case PLUS: return val1 + val2;
             case MINUS: return val1 - val2;
             case TIMES: return val1 * val2;
@@ -295,7 +297,7 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   for (int i = 0; i < nr_token; i++) {
-	if (tokens[i].type == '*' && (i == 0 \
+	if (tokens[i].str[0] == '*' && (i == 0 \
 				|| tokens[i - 1].type == DIVIDE \
 				|| tokens[i - 1].type == LeftBracket \
 				|| tokens[i - 1].type == PLUS \
