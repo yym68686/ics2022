@@ -243,7 +243,6 @@ uint32_t eval(int p, int q) {
 		int val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF)
 			val1 = eval(p, op - 1);
-// 		if (tokens[op].type != DEREF)
 		val2 = eval(op + 1, q);
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
@@ -278,6 +277,7 @@ int find_dominated_op(int p, int q){
 			   && !stack)
 			return pos;
 		pos--;
+
 	}
 	pos = q, stack = 0;
 	while (pos != p){
