@@ -214,11 +214,8 @@ int check_error(int p, int q){
 	return 1;
 }
 uint32_t eval(int p, int q) {
-// 	printf("%d %d %s %s check:%d\n",  p, q, tokens[p].str,  tokens[q].str, check_parentheses(p, q));
-
     if (p > q) {
         /* Bad expression */
-// 		printf("%d %d %s %s %d:\n",  p, q, tokens[p].str,  tokens[q].str, tokens[q].type == MINUS);
 		if (q == -1) exit(0);
 		printf("Invalid expression: ");
 		int len = 0;
@@ -263,14 +260,10 @@ uint32_t eval(int p, int q) {
     }
     else {
 		int op = find_dominated_op(p, q);
-
-		printf("p:%d q:%d op:%d opstr:%s bool:%d\n", p, q, op, tokens[op].str, tokens[op].type == TK_NEG);
 		uint32_t val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF && tokens[op].type != TK_NEG)
-		printf("p:%d op - 1:%d\n", p, op - 1), val1 = eval(p, op - 1);
-// 		printf("op+1:%d q:%d\n", op + 1, q);
+			val1 = eval(p, op - 1);
 		val2 = eval(op + 1, q);
-// 		return 0;
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
 			case TK_NEQ: return val1 != val2;
@@ -344,7 +337,6 @@ uint32_t expr(char *e, bool *success) {
 			tokens[i].type = TK_NEG;
 		}
 	}
-	printf("%d %d", tokens[0].type == TK_NEG, tokens[1].type == TK_NEG);
 	if (!check_error(0, nr_token - 1)) {
 		*success = false;
 		return 0;
