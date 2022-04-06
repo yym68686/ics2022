@@ -153,7 +153,7 @@ static bool make_token(char *e) {
          default: flag = 1;
         }
 		if (!flag)
-			strncpy(tokens[nr_token++].str, e + position, substr_len), printf("*%s\n", tokens[nr_token - 1].str);
+			strncpy(tokens[nr_token++].str, e + position, substr_len);
         position += substr_len;
         break;
       }
@@ -226,14 +226,10 @@ uint32_t eval(int p, int q) {
 		return 0x3f3f3f3f;
     }
     else if (p == q) {
-		if (tokens[p].type == TK_DEC){
-			printf("%s\n", tokens[p].str);
+		if (tokens[p].type == TK_DEC)
 			return (uint32_t)atol(tokens[p].str);
-		}
 		if (tokens[p].type == TK_REG){
 			char *reg = strtok(tokens[p].str, "$");
-			printf("eip:%s\n", reg);
-			printf("strcmp:%d\n", strcmp(reg, "eip"));
 			if (!strcmp(reg, "eip")) return cpu.eip;
 			for (int i = 0; i < nr_token; i++)
 				if (!strcmp(reg, regsl[i]))
