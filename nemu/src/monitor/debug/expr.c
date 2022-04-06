@@ -227,6 +227,14 @@ uint32_t eval(int p, int q) {
     else if (p == q) {
 		if (tokens[p].type == TK_DEC)
 			return atoi(tokens[p].str);
+		if (tokens[p].type == TK_REG){
+			char *reg = strtok(NULL, "$");
+			printf("%s\n", reg);
+			for (int i = 0; i < nr_token; i++){
+				if (!strcmp(reg, regsl[i]))
+					return cpu.gpr[i]._32;
+			}
+		}
         /* Single token.
         * For now this token should be a number.
         * Return the value of the number.
@@ -277,7 +285,6 @@ int find_dominated_op(int p, int q){
 			   && !stack)
 			return pos;
 		pos--;
-
 	}
 	pos = q, stack = 0;
 	while (pos != p){
