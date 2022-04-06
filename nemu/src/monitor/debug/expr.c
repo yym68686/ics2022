@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <regex.h>
 #include <stdlib.h>
-
+#include <string.h>
 enum {
   TK_NOTYPE = 256,
   TK_EQ,
@@ -89,6 +89,7 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
+  memset(tokens, 0, sizeof(Token) * 32);
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
