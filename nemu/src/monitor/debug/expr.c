@@ -237,7 +237,7 @@ uint32_t eval(int p, int q) {
 			char *s = strtok(NULL, "0x");
 			printf("%s\n", s);
 			uint32_t n = 0;
-			for (int i = 2; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
+			for (int i = 0; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
 				if (s[i] > '9')
 					n = 16 * n + (10 + s[i] - 'a');
 				else
