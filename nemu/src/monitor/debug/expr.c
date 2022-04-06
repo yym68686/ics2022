@@ -247,6 +247,7 @@ uint32_t eval(int p, int q) {
 			}
 			return n;
 		}
+
         /* Single token.
         * For now this token should be a number.
         * Return the value of the number.
