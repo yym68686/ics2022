@@ -316,7 +316,7 @@ int find_dominated_op(int p, int q){
 			return pos;
 		pos--;
 	}
-	return 0;
+	return p;
 }
 uint32_t expr(char *e, bool *success) {
 	if (!make_token(e)) {
