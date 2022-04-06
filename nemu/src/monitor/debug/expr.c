@@ -234,13 +234,12 @@ uint32_t eval(int p, int q) {
 					return cpu.gpr[i]._32;
 		}
 		if (tokens[p].type == TK_HEX){
-			char *s = strtok(NULL, "0x");
 			uint32_t n = 0;
-			for (int i = 0; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
-				if (s[i] > '9')
-					n = 16 * n + (10 + s[i] - 'a');
+			for (int i = 2; (tokens[p].str[i] >= '0' && tokens[p].str[i] <= '9') || (tokens[p].str[i] >= 'a' && tokens[p].str[i] <= 'z') || (tokens[p].str[i] >='A' && tokens[p].str[i] <= 'Z'); i++){
+				if (tokens[p].str[i] > '9')
+					n = 16 * n + (10 + tokens[p].str[i] - 'a');
 				else
-					n = 16 * n + (s[i] - '0');
+					n = 16 * n + (tokens[p].str[i] - '0');
 			}
 			return n;
 		}
