@@ -214,6 +214,8 @@ int check_error(int p, int q){
 	return 1;
 }
 uint32_t eval(int p, int q) {
+	printf("%d %d %s %s %d:\n",  p, q, tokens[p].str,  tokens[q].str, check_parentheses(p, q));
+
     if (p > q) {
         /* Bad expression */
 		printf("%d %d %s %s %d:\n",  p, q, tokens[p].str,  tokens[q].str, tokens[q].type == MINUS);
