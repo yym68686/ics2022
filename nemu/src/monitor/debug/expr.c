@@ -262,10 +262,11 @@ uint32_t eval(int p, int q) {
 		int op = find_dominated_op(p, q);
 
 		printf("op:%d\n", op);
-		return 0;
 		uint32_t val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF && tokens[op].type != TK_NEG)
 			val1 = eval(p, op - 1);
+		printf("val1:%d\n", val1);
+		return 0;
 		val2 = eval(op + 1, q);
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
