@@ -235,7 +235,6 @@ uint32_t eval(int p, int q) {
 		}
 		if (tokens[p].type == TK_HEX){
 			char *s = strtok(NULL, "0x");
-			printf("%s\n", s);
 			uint32_t n = 0;
 			for (int i = 0; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
 				if (s[i] > '9')
