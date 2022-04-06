@@ -343,6 +343,7 @@ uint32_t expr(char *e, bool *success) {
 			tokens[i].type = TK_NEG;
 		}
 	}
+	printf("%d %d", tokens[0].type == TK_NEG, tokens[1].type == TK_NEG);
 	if (!check_error(0, nr_token - 1)) {
 		*success = false;
 		return 0;
