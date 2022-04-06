@@ -228,7 +228,7 @@ uint32_t eval(int p, int q) {
     else if (p == q) {
 		if (tokens[p].type == TK_DEC){
 			printf("%s\n", tokens[p].str);
-			return atol(tokens[p].str);
+			return (uint32_t)atol(tokens[p].str);
 		}
 		if (tokens[p].type == TK_REG){
 			char *reg = strtok(NULL, "$");
