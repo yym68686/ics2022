@@ -336,6 +336,8 @@ uint32_t expr(char *e, bool *success) {
 			tokens[i].type = TK_NEG;
 		}
 	}
+	printf("%d %d\n", tokens[2].type == MINUS, tokens[2].type == TK_NEG);
+	return 0;
 	if (!check_error(0, nr_token - 1)) {
 		*success = false;
 		return 0;
