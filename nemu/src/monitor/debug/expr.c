@@ -152,7 +152,7 @@ static bool make_token(char *e) {
          default: flag = 1;
         }
 		if (!flag)
-			strncpy(tokens[nr_token++].str, e + position, substr_len);
+			strncpy(tokens[nr_token++].str, e + position, substr_len), printf("*%s\n", tokens[nr_token - 1].str);
         position += substr_len;
         break;
       }
