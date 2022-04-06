@@ -339,6 +339,7 @@ uint32_t expr(char *e, bool *success) {
                  || tokens[i - 1].type == LeftBracket \
                  || tokens[i - 1].type == PLUS \
                  || tokens[i - 1].type == MINUS \
+                 || tokens[i - 1].type == TK_NEG \
                  || tokens[i - 1].type == TIMES) ) {
 			tokens[i].type = TK_NEG;
 		}
