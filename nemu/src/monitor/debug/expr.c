@@ -232,6 +232,7 @@ uint32_t eval(int p, int q) {
 		}
 		if (tokens[p].type == TK_REG){
 			char *reg = strtok(NULL, "$");
+			printf("strcmp:%d\n", strcmp(reg, "eip"));
 			if (!strcmp(reg, "eip")) return cpu.eip;
 			for (int i = 0; i < nr_token; i++)
 				if (!strcmp(reg, regsl[i]))
