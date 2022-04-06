@@ -261,6 +261,7 @@ uint32_t eval(int p, int q) {
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF)
 			val1 = eval(p, op - 1);
 		val2 = eval(op + 1, q);
+		printf("%d\n", val2);
         switch (tokens[op].type) {
 			case TK_EQ: return val1 == val2;
 			case TK_NEQ: return val1 != val2;
