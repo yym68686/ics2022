@@ -76,12 +76,23 @@ static int cmd_x(char *args){
         return 0;
     }
 	uint32_t n = 0;
-    for (int i = 2; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
-        if (s[i] > '9')
-            n = 16 * n + (10 + s[i] - 'a');
-        else
-            n = 16 * n + (s[i] - '0');
-    }
+
+	if (s[0] == '0' && s[0] == 'x'){
+		for (int i = 2; (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >='A' && s[i] <= 'Z'); i++){
+			if (s[i] > '9')
+				n = 16 * n + (10 + s[i] - 'a');
+			else
+				n = 16 * n + (s[i] - '0');
+		}
+	}
+	else {
+		bool success = true;
+		n = expr(s, &success);
+		if (!success || n == -1162167624){
+			puts("Missing parameter.");
+			return 0;
+		} 
+	}
     //循环使用 vaddr_read 函数来读取内存
 	puts("Address         Dword block\tByte sequence");
     for(int i = 0; i < atoi(arg1); i++){
