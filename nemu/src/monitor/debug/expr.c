@@ -216,7 +216,7 @@ int check_error(int p, int q){
 uint32_t eval(int p, int q) {
     if (p > q) {
         /* Bad expression */
-		printf("%s %d:\n",   tokens[q].str, tokens[q].type == MINUS);
+		printf("%d %d %s %d:\n",  p, q, tokens[q].str, tokens[q].type == MINUS);
 		printf("Invalid expression: ");
 		int len = 0;
 		for (int i = 0; i < nr_token; i++){
