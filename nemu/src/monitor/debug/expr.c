@@ -267,7 +267,7 @@ uint32_t eval(int p, int q) {
 		printf("op:%d %s\n", op, tokens[op].str);
 		uint32_t val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF && tokens[op].type != TK_NEG)
-			val1 = eval(p, op - 1);
+		printf("p:%d op - 1:%d\n", p, op - 1), val1 = eval(p, op - 1);
 		printf("op+1:%d q:%d\n", op + 1, q);
 		val2 = eval(op + 1, q);
 		return 0;
