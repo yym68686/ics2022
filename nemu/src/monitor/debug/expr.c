@@ -231,7 +231,7 @@ uint32_t eval(int p, int q) {
 		if (tokens[p].type == TK_REG){
 			char *reg = strtok(tokens[p].str, "$");
 			if (!strcmp(reg, "eip")) return cpu.eip;
-			for (int i = 0; i < nr_token; i++)
+			for (int i = 0; i < 8; i++)
 				if (!strcmp(reg, regsl[i]))
 					return cpu.gpr[i]._32;
 		}
