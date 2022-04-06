@@ -264,7 +264,7 @@ uint32_t eval(int p, int q) {
     else {
 		int op = find_dominated_op(p, q);
 
-// 		printf("p:%d q:%d op:%d opstr:%s\n", p, q, op, tokens[op].str);
+		printf("p:%d q:%d op:%d opstr:%s\n", p, q, op, tokens[op].str);
 		uint32_t val1 = 0, val2 = 0;
 		if (tokens[op].type != TK_NOT && tokens[op].type != DEREF && tokens[op].type != TK_NEG)
 		printf("p:%d op - 1:%d\n", p, op - 1), val1 = eval(p, op - 1);
