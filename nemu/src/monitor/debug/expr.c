@@ -225,8 +225,10 @@ uint32_t eval(int p, int q) {
 		return 0x3f3f3f3f;
     }
     else if (p == q) {
-		if (tokens[p].type == TK_DEC)
+		if (tokens[p].type == TK_DEC){
+			printf("%s\n", tokens[p].str);
 			return atoi(tokens[p].str);
+		}
 		if (tokens[p].type == TK_REG){
 			char *reg = strtok(NULL, "$");
 			if (!strcmp(reg, "eip")) return cpu.eip;
