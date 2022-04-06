@@ -231,7 +231,8 @@ uint32_t eval(int p, int q) {
 			return (uint32_t)atol(tokens[p].str);
 		}
 		if (tokens[p].type == TK_REG){
-			char *reg = strtok(NULL, "$");
+			char *reg = strtok(NULL, " ");
+			reg = strtok(NULL, "$");
 			printf("eip:%s\n", reg);
 			printf("strcmp:%d\n", strcmp(reg, "eip"));
 			if (!strcmp(reg, "eip")) return cpu.eip;
