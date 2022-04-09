@@ -107,7 +107,7 @@ void list_watchpoint(void){
 	if (!head) return;
 	puts("NO expr");
 	WP* tmp = head;
-	while (tmp->next){
+	while (tmp){
 		printf("%2d %s\n", tmp->NO, tmp->expr);
 		tmp = tmp->next;
 	}
