@@ -123,12 +123,12 @@ static int cmd_w(char *args){
 	return 0;
 }	
 static int cmd_d(char *args){
-    char *arg = strtok(NULL, " ");
-	if (arg == NULL){
-		puts("Missing parameter.");
-		return 0;
-	}
-	int result = delete_watchpoint(atoi(arg));
+//     char *arg = strtok(NULL, " ");
+// 	if (arg == NULL){
+// 		puts("Missing parameter.");
+// 		return 0;
+// 	}
+	int result = delete_watchpoint(atoi(args));
 	if (!result) puts("error!");
 	return 0;
 }
