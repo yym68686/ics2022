@@ -118,12 +118,7 @@ static int cmd_w(char *args){
 		puts("Missing parameter.");
 		return 0;
 	}
-	int index = set_watchpoint(arg);
-	printf("Set watchpoint #%d\n", index);
-	printf("expr = %s\n", arg);
-	bool success = true;
-	uint32_t result = expr(arg, &success);
-	if (success == true && result != -1162167624) printf("old value = %d\n", result);
+	set_watchpoint(arg);
 	return 0;
 }	
 

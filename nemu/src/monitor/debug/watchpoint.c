@@ -25,7 +25,7 @@ WP* new_wp(){
 	if (head == NULL)
 		head = free_;
 	WP* tmp = free_;
-	free_ = free->next;
+	free_ = free_->next;
 	if (head->NO < tmp->NO){
 		tmp->next = head;
 		head = tmp;
@@ -80,6 +80,14 @@ void free_wp(WP *wp){
 int set_watchpoint(char *e){
 	WP* new = new_wp();
 	strcpy(new->expr, e);
+    printf("Set watchpoint #%d\n", new->NO);
+    printf("expr = %s\n", e);
+	bool success = true;
+    uint32_t result = expr(e, &success);
+    if (success == true && result != -1162167624){
+        printf("old value = %d\n", result);
+        new->old_val = result;
+    }
 	return new->NO;
 }
 //给予一个监视点编号，从已使用的监视点中归还该监视点到池中
