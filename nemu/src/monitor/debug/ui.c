@@ -114,12 +114,12 @@ static int cmd_p(char *args){
 	return 0;
 }	
 static int cmd_w(char *args){
-    char *arg = strtok(args, " ");
-	if (arg == NULL){
-		puts("Missing parameter.");
-		return 0;
-	}
-	set_watchpoint(arg);
+//     char *arg = strtok(args, " ");
+// 	if (arg == NULL){
+// 		puts("Missing parameter.");
+// 		return 0;
+// 	}
+	set_watchpoint(args);
 	return 0;
 }	
 static int cmd_d(char *args){
