@@ -112,6 +112,20 @@ static int cmd_p(char *args){
 	if (success == true && result != -1162167624) printf("%d\n", result);
 	return 0;
 }	
+static int cmd_w(char *args){
+    char *arg = strtok(NULL, " ");
+	if (arg == NULL){
+		puts("Missing parameter.");
+		return 0;
+	}
+	WP* newwp = new_wp();
+	printf("Set watchpoint #%d\n", newwp->NO);
+	printf("expr = %s\n", arg);
+	bool success = true;
+	uint32_t result = expr(arg, &success);
+	if (success == true && result != -1162167624) printf("old value = %d\n", result);
+	return 0;
+}	
 
 static struct {
   char *name;
@@ -125,6 +139,7 @@ static struct {
   { "info", "Print program status", cmd_info },
   { "x", "Scan memory", cmd_x },
   { "p", "Expression evaluation", cmd_p },
+  { "w", "Add watchpoints", cmd_w },
 
   /* TODO: Add more commands */
 
