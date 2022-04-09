@@ -107,12 +107,12 @@ bool delete_watchpoint(int NO){
 // 		printf("delete_watchpoint:%d free_->NO:%d\n", tmp->NO, free_->NO);
 		if (tmp->NO == NO){
 			free_wp(tmp);
+			WP* temp = head;
+			while(temp) printf("%d ", temp->NO), temp = temp->next;
 			return true;
 		}
 		tmp = tmp->next;
 	}
-	tmp = head;
-	while(tmp) printf("%d ", tmp->NO), tmp = tmp->next;
 	puts("");
 	return false;
 } 
