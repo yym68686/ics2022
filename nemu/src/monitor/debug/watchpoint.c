@@ -92,8 +92,9 @@ int set_watchpoint(char *e){
 }
 //给予一个监视点编号，从已使用的监视点中归还该监视点到池中
 bool delete_watchpoint(int NO){
+	if (!head) return false;
 	WP* tmp = head;
-	while (tmp->next){
+	while (tmp){
 		if (tmp->NO == NO){
 			free_wp(tmp);
 			return true;
