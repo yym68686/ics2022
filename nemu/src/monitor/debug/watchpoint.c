@@ -27,7 +27,7 @@ WP* new_wp(){
 	WP* tmp = free_;
 	free_ = free_->next;
 	tmp->next = NULL;
-// 	printf("new_wp free_ == NULL:%d\n", free_ == NULL);
+	printf("new_wp free_->NO:%d\n", free_->NO);
 	if (head->NO > tmp->NO){
 		tmp->next = head;
 		head = tmp;
