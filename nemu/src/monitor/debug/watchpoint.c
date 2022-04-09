@@ -61,7 +61,18 @@ void free_wp(WP *wp){
 		wp->next = NULL;
 	}
 	if (wp->NO < free_->NO){
-		if (head == wp) head = head->next;
+// 		if (head == wp) head = head->next;
+// 		else {
+			WP *t = head, *pre = t;
+			while (t){
+				if (t->NO == wp->NO){
+					pre->next = wp->next;
+					break;
+				}
+				pre = t;
+				t = t->next;
+			}
+// 		}
 		wp->next = free_;
 		free_ = wp;
 		if (!head->next && head == free_) head = NULL;
@@ -110,6 +121,7 @@ bool delete_watchpoint(int NO){
 			free_wp(tmp);
 			WP* temp = head;
 			while(temp) printf("%d ", temp->NO), temp = temp->next;
+			puts("");
 			return true;
 		}
 		tmp = tmp->next;
