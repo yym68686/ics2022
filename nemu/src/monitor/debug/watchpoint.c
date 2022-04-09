@@ -32,6 +32,7 @@ WP* new_wp(){
 		head = tmp;
 		return tmp;
 	}
+	printf("new_wp free_ == NULL:%d\n", free_ == NULL);
 
 	WP *temp = head, *last = temp;
 	while (temp->next){
