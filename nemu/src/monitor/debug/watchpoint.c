@@ -111,6 +111,9 @@ bool delete_watchpoint(int NO){
 		}
 		tmp = tmp->next;
 	}
+	tmp = head;
+	while(tmp) printf("%d ", tmp->NO), tmp = tmp->next;
+	puts("");
 	return false;
 } 
 //显示当前在使用状态中的监视点列表
