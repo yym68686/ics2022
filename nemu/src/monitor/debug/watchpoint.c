@@ -104,6 +104,7 @@ bool delete_watchpoint(int NO){
 } 
 //显示当前在使用状态中的监视点列表
 void list_watchpoint(void){
+	if (!head) return;
 	puts("NO expr");
 	WP* tmp = head;
 	while (tmp->next){
