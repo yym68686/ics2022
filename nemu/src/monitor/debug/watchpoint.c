@@ -81,6 +81,7 @@ void free_wp(WP *wp){
 //给予一个表达式e，构造以该表达式为监视目标的监视点，并返回编号
 int set_watchpoint(char *e){
 	WP* new = new_wp();
+	printf("set_watchpoint free_->NO:%d\n", free_->NO);
 	strcpy(new->expr, e);
     printf("Set watchpoint #%d\n", new->NO);
     printf("expr = %s\n", e);
