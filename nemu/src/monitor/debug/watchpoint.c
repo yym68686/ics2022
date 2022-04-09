@@ -104,12 +104,12 @@ bool delete_watchpoint(int NO){
 } 
 //显示当前在使用状态中的监视点列表
 void list_watchpoint(void){
+	puts("NO expr");
 	WP* tmp = head;
 	while (tmp->next){
-		printf("%d ", tmp->NO);
+		printf("%2d %s\n", tmp->NO, tmp->expr);
 		tmp = tmp->next;
 	}
-	puts("");
 	return;
 }
 //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL

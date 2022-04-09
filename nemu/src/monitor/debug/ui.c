@@ -59,6 +59,7 @@ static int cmd_info(char *args){
     }
 	else if (strcmp(arg, "w") == 0)
     {
+		list_watchpoint();
         // 这里我们会在 PA1.3 中实现
     }
     return 0;
@@ -121,6 +122,16 @@ static int cmd_w(char *args){
 	set_watchpoint(arg);
 	return 0;
 }	
+static int cmd_d(char *args){
+    char *arg = strtok(NULL, " ");
+	if (arg == NULL){
+		puts("Missing parameter.");
+		return 0;
+	}
+	int result = delete_watchpoint(atoi(arg));
+	if (!result) puts("error!");
+	return 0;
+}
 
 static struct {
   char *name;
@@ -135,6 +146,7 @@ static struct {
   { "x", "Scan memory", cmd_x },
   { "p", "Expression evaluation", cmd_p },
   { "w", "Add watchpoints", cmd_w },
+  { "d", "Delete watchpoints", cmd_d },
 
   /* TODO: Add more commands */
 
