@@ -35,16 +35,20 @@ WP* new_wp(){
 	}
 
 	WP *temp = head, *last = temp;
-	while (temp->next){
+// 	while (temp) last = temp, temp = temp->next;
+// 	last->next = tmp;
+
+// 	temp = head;
+	while (temp){
 		last = temp;
 		temp = temp->next;
-		if (temp->NO < tmp->NO){
+		if (temp && temp->NO > tmp->NO){
 			last->next = tmp;
 			tmp->next = temp;
 			break;
 		}
-		else if(!temp->next){
-			temp->next = tmp;
+		else if(!temp){
+			last->next = tmp;
 			tmp->next = NULL;
 			break;
 		}
