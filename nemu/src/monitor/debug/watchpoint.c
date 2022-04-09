@@ -27,12 +27,12 @@ WP* new_wp(){
 	WP* tmp = free_;
 	tmp->next = NULL;
 	free_ = free_->next;
+	printf("new_wp free_ == NULL:%d\n", free_ == NULL);
 	if (head->NO > tmp->NO){
 		tmp->next = head;
 		head = tmp;
 		return tmp;
 	}
-	printf("new_wp free_ == NULL:%d\n", free_ == NULL);
 
 	WP *temp = head, *last = temp;
 	while (temp->next){
