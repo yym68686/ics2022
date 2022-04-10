@@ -31,7 +31,6 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-	puts("***");
 	WP* hit = scan_watchpoint(old_eip);
 	if (hit) nemu_state = NEMU_STOP;
 
