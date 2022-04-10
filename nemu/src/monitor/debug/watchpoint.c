@@ -177,7 +177,7 @@ void list_watchpoint(void){
 	while (tmp){
 		bool success = true;
 		uint32_t result = expr(tmp->expr, &success);
-		if (success == true && result != -1162167624) printf("%2d %10s0x%x\n", tmp->NO, tmp->expr, tmp->old_val);
+		if (success == true && result != -1162167624) printf("%2d %-10s0x%x\n", tmp->NO, tmp->expr, tmp->old_val);
 		else break;
 		tmp = tmp->next;
 	}
