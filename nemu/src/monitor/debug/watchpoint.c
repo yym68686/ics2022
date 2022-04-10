@@ -27,7 +27,7 @@ WP* new_wp(){
 	WP* tmp = free_;
 	free_ = free_->next;
 	tmp->next = NULL;
-	printf("new_wp free_->NO:%d\n", free_->NO);
+// 	printf("new_wp free_->NO:%d\n", free_->NO);
 	if (head->NO > tmp->NO){
 		tmp->next = head;
 		head = tmp;
@@ -99,7 +99,7 @@ void free_wp(WP *wp){
 //给予一个表达式e，构造以该表达式为监视目标的监视点，并返回编号
 int set_watchpoint(char *e){
 	WP* new = new_wp();
-	printf("set_watchpoint new->NO:%d\n", new->NO);
+// 	printf("set_watchpoint new->NO:%d\n", new->NO);
 // 	printf("set_watchpoint free_->NO:%d\n", free_->NO);
 	strcpy(new->expr, e);
     printf("Set watchpoint #%d\n", new->NO);
@@ -117,12 +117,12 @@ bool delete_watchpoint(int NO){
 	if (!head) return false;
 	WP* tmp = head;
 	while (tmp){
-		printf("delete_watchpoint:%d free_->NO:%d head->NO:%d\n", tmp->NO, free_->NO, head->NO);
+// 		printf("delete_watchpoint:%d free_->NO:%d head->NO:%d\n", tmp->NO, free_->NO, head->NO);
 		if (tmp->NO == NO){
 			free_wp(tmp);
-			WP* temp = head;
-			while(temp) printf("%d ", temp->NO), temp = temp->next;
-			puts("");
+// 			WP* temp = head;
+// 			while(temp) printf("%d ", temp->NO), temp = temp->next;
+// 			puts("");
 			return true;
 		}
 		tmp = tmp->next;
