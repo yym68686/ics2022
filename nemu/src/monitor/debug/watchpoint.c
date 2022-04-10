@@ -137,7 +137,7 @@ int set_watchpoint(char *e){
 	bool success = true;
     uint32_t result = expr(e, &success);
     if (success == true && result != -1162167624){
-        printf("old value = 0x%x\n", result);
+        printf("old value = 0x%08x\n", result);
         new->old_val = result;
     }
 	return new->NO;
@@ -177,7 +177,7 @@ void list_watchpoint(void){
 	while (tmp){
 		bool success = true;
 		uint32_t result = expr(tmp->expr, &success);
-		if (success == true && result != -1162167624) printf("%2d %-10s0x%x\n", tmp->NO, tmp->expr, tmp->old_val);
+		if (success == true && result != -1162167624) printf("%2d %-10s0x%08x\n", tmp->NO, tmp->expr, tmp->old_val);
 		else break;
 		tmp = tmp->next;
 	}
