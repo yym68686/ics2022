@@ -188,6 +188,7 @@ WP* scan_watchpoint(uint32_t eip){
 	while (cur->next){
 		bool success = true;
 		uint32_t result = expr(cur->expr, &success);
+		printf("result:0x%x\n", result);
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
