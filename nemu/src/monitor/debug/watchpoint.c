@@ -184,9 +184,8 @@ void list_watchpoint(void){
 }
 //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL
 WP* scan_watchpoint(uint32_t eip){
-	puts("***");
 	WP *cur = head;
-	while (cur->next){
+	while (cur){
 		bool success = true;
 		uint32_t result = expr(cur->expr, &success);
 		printf("result:0x%x\n", result);
