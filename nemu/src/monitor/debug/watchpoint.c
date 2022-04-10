@@ -38,7 +38,6 @@ WP* new_wp(){
 // 	while (temp) last = temp, temp = temp->next;
 // 	last->next = tmp;
 
-// 	temp = head;
 	while (temp){
 		last = temp;
 		temp = temp->next;
