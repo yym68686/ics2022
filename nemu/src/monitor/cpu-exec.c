@@ -24,13 +24,14 @@ void cpu_exec(uint64_t n) {
   bool print_flag = n < MAX_INSTR_TO_PRINT;
 
   for (; n > 0; n --) {
+	uint32_t old_eip = cpu.eip;
     /* Execute one instruction, including instruction fetch,
      * instruction decode, and the actual execution. */
     exec_wrapper(print_flag);
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-	WP* hit = scan_watchpoint();
+	WP* hit = scan_watchpoint(old_eip);
 	if (hit) nemu_state = NEMU_STOP;
 
 #endif

@@ -184,7 +184,7 @@ void list_watchpoint(void){
 	return;
 }
 //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL
-WP* scan_watchpoint(void){
+WP* scan_watchpoint(uint32_t eip){
 	WP *cur = head;
 	while (cur->next){
 		bool success = true;
@@ -192,7 +192,7 @@ WP* scan_watchpoint(void){
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
-			printf("Hit watchpoint %d at address 0x%08x\n", cur->NO, cpu.eip);
+			printf("Hit watchpoint %d at address 0x%08x\n", cur->NO, eip);
 			printf("expr      = %s\n", cur->expr);
 			printf("old value = 0x%08x\nnew value = 0x%08x\n", cur->old_val, cur->new_val);
 			puts("program paused");
