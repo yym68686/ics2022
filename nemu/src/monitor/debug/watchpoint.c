@@ -192,7 +192,7 @@ WP* scan_watchpoint(void){
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
-			printf("Hit watchpoint %d at address 0x%d", cur->NO);
+			printf("Hit watchpoint %d at address 0x%d", cur->NO, cur->NO);
 			printf("expr      = %s\n", cur->expr);
 			printf("old value = %d\nnew value = %d\n", cur->old_val, cur->new_val);
 			puts("program paused");
