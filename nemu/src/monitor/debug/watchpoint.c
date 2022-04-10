@@ -89,6 +89,7 @@ void free_wp(WP *wp){
 		last = temp;
 		temp = temp->next;
 	}
+	
 
 	//以下代码功能如图所示：
 	//    head                      +-------------------------->...               head
