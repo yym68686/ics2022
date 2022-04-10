@@ -82,7 +82,7 @@ void free_wp(WP *wp){
 	while (temp->next){
 		last = temp;
 		temp = temp->next;
-		if (temp->NO < wp->NO){
+		if (temp->NO > wp->NO){
 			last->next = wp;
 			wp->next = temp;
 			break;
