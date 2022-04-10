@@ -61,8 +61,8 @@ void free_wp(WP *wp){
 		wp->next = NULL;
 	}
 	if (wp->NO < free_->NO){
-// 		if (head == wp) head = head->next;
-// 		else {
+		if (head == wp) head = head->next;
+		else {
 			WP *t = head, *pre = t;
 			while (t){
 				if (t->NO == wp->NO){
@@ -72,7 +72,7 @@ void free_wp(WP *wp){
 				pre = t;
 				t = t->next;
 			}
-// 		}
+		}
 		wp->next = free_;
 		free_ = wp;
 		if (!head->next && head == free_) head = NULL;
