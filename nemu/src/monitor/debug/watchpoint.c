@@ -1,6 +1,6 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
-
+#include "nemu.h"
 #define NR_WP 32
 
 static WP wp_pool[NR_WP];
@@ -192,9 +192,9 @@ WP* scan_watchpoint(void){
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
-			printf("Hit watchpoint %d at address 0x%d", cur->NO, cur->NO);
+			printf("Hit watchpoint %d at address 0x%08x", cur->NO, cpu.eip);
 			printf("expr      = %s\n", cur->expr);
-			printf("old value = %d\nnew value = %d\n", cur->old_val, cur->new_val);
+			printf("old value = 0x%08x\nnew value = 0x%08x\n", cur->old_val, cur->new_val);
 			puts("program paused");
 			cur->old_val = cur->new_val;
 			return cur;
