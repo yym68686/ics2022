@@ -167,6 +167,7 @@ bool delete_watchpoint(int NO){
 	puts("");
 	return false;
 } 
+
 //显示当前在使用状态中的监视点列表
 void list_watchpoint(void){
 	if (!head) return;
@@ -187,6 +188,7 @@ WP* scan_watchpoint(void){
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
+			printf("Watchpoint #%d\nold value: %d\nnew value: %d\n", cur->NO, old_val, new_val);
 			cur->old_val = cur->new_val;
 			return cur;
 		}
