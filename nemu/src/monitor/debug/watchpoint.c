@@ -133,11 +133,11 @@ int set_watchpoint(char *e){
 // 	printf("set_watchpoint free_->NO:%d\n", free_->NO);
 	strcpy(new->expr, e);
     printf("Set watchpoint #%d\n", new->NO);
-    printf("expr = %s\n", e);
+    printf("expr      = %s\n", e);
 	bool success = true;
     uint32_t result = expr(e, &success);
     if (success == true && result != -1162167624){
-        printf("old value = %d\n", result);
+        printf("old value = 0x%x\n", result);
         new->old_val = result;
     }
 	return new->NO;
@@ -157,6 +157,7 @@ bool delete_watchpoint(int NO){
 // 		printf("delete_watchpoint:%d free_->NO:%d head->NO:%d\n", tmp->NO, free_->NO, head->NO);
 		if (tmp->NO == NO){
 			free_wp(tmp);
+			printf("Watchpoint %d deleted", tmp->NO);
 // 			WP* temp = head;
 // 			while(temp) printf("%d ", temp->NO), temp = temp->next;
 // 			puts("");
@@ -171,10 +172,13 @@ bool delete_watchpoint(int NO){
 //显示当前在使用状态中的监视点列表
 void list_watchpoint(void){
 	if (!head) return;
-	puts("NO expr");
+	puts("NO Expr      Old Value");
 	WP* tmp = head;
 	while (tmp){
-		printf("%2d %s\n", tmp->NO, tmp->expr);
+		bool success = true;
+		uint32_t result = expr(tmp->expr, &success);
+		if (success == true && result != -1162167624) printf("%2d %10s0x%x\n", tmp->NO, tmp->expr, tmp->old_val);
+		else break;
 		tmp = tmp->next;
 	}
 	return;
@@ -188,7 +192,10 @@ WP* scan_watchpoint(void){
 		if (success == true && result != -1162167624) cur->new_val = result;
 		else return NULL;
 		if (cur->old_val != cur->new_val){
-			printf("Watchpoint #%d\nold value: %d\nnew value: %d\n", cur->NO, old_val, new_val);
+			printf("Hit watchpoint %d at address 0x%d", cur->NO);
+			printf("expr      = %s\n", cur->expr);
+			printf("old value = %d\nnew value = %d\n", cur->old_val, cur->new_val);
+			puts("program paused");
 			cur->old_val = cur->new_val;
 			return cur;
 		}
