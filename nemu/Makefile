@@ -52,3 +52,5 @@ gdb: $(BINARY)
 
 clean: 
 	rm -rf $(BUILD_DIR)
+count:
+	find /home/yanyuming/ics2022/nemu/ -name "*.c" -or -name "*.h"|xargs cat|wc -l
