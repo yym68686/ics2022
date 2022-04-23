@@ -137,7 +137,7 @@ opcode_entry opcode_table [512] = {
   /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xfc */	EMPTY, EMPTY, IDEXW(E, gp4, 1), IDEX(E, gp5),
 
-  /*2 byte_opcode_table */
+  /*2 byte_opcode_table */ // 使用转义码(escape code).x86中有一个2字节转义码0x0f, 当指令opcode的第一个字节是0x0f时, 表示需要再读入一个字节才能决定具体的指令形式
 
   /* 0x00 */	EMPTY, IDEX(gp7_E, gp7), EMPTY, EMPTY,
   /* 0x04 */	EMPTY, EMPTY, EMPTY, EMPTY,
@@ -205,18 +205,18 @@ opcode_entry opcode_table [512] = {
   /* 0xfc */	EMPTY, EMPTY, EMPTY, EMPTY
 };
 
-static make_EHelper(2byte_esc) {
+static make_EHelper(2byte_esc) { // exec_2byte_esc(vaddr_t* eip)
   uint32_t opcode = instr_fetch(eip, 1) | 0x100;
   decoding.opcode = opcode;
   set_width(opcode_table[opcode].width);
   idex(eip, &opcode_table[opcode]);
 }
 
-make_EHelper(real) {
-  uint32_t opcode = instr_fetch(eip, 1);
+make_EHelper(real) { // exec_real(vaddr_t* eip)
+  uint32_t opcode = instr_fetch(eip, 1); // 获取操作码（取指），eip发生变化，即decoding.seq_eip = decoding.seq_eip + 1;
   decoding.opcode = opcode;
-  set_width(opcode_table[opcode].width);
-  idex(eip, &opcode_table[opcode]);
+  set_width(opcode_table[opcode].width); // 设置操作数宽度
+  idex(eip, &opcode_table[opcode]); // 译码和执行
 }
 
 static inline void update_eip(void) {
@@ -230,7 +230,7 @@ void exec_wrapper(bool print_flag) {
 #endif
 
   decoding.seq_eip = cpu.eip;
-  exec_real(&decoding.seq_eip);
+  exec_real(&decoding.seq_eip); // 取指-译码-执行
 
 #ifdef DEBUG
   int instr_len = decoding.seq_eip - cpu.eip;
