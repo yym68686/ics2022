@@ -50,14 +50,7 @@ typedef union {
   uint8_t val;
 } ModR_M;
 
-typedef union {
-  struct {
-    uint8_t base	:3;
-    uint8_t index	:3;
-    uint8_t ss		:2;
-  };
-  uint8_t val;
-} SIB;
+typedef union SIB;
 
 void load_addr(vaddr_t *, ModR_M *, Operand *);
 void read_ModR_M(vaddr_t *, Operand *, bool, Operand *, bool);
