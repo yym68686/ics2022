@@ -5,6 +5,7 @@
 
 #define make_EHelper(name) void concat(exec_, name) (vaddr_t *eip)
 typedef void (*EHelper) (vaddr_t *);
+
 make_EHelper(call);
 
 #include "cpu/decode.h"
