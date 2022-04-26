@@ -7,6 +7,7 @@
 typedef void (*EHelper) (vaddr_t *);
 
 make_EHelper(call);
+make_EHelper(push);
 
 #include "cpu/decode.h"
 
