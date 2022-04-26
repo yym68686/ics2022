@@ -29,7 +29,6 @@ static inline make_DopHelper(I) {
 /* sign immediate */
 static inline make_DopHelper(SI) {
   assert(op->width == 1 || op->width == 4);
-	printf("%n\n", eip);
   op->type = OP_TYPE_IMM;
 
   /* TODO: Use instr_fetch() to read `op->width' bytes of memory
@@ -267,6 +266,7 @@ make_DHelper(J) {
 }
 
 make_DHelper(push_SI) {
+	puts("***");
   decode_op_SI(eip, id_dest, true);
 }
 
