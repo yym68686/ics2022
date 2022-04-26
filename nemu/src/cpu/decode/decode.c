@@ -196,6 +196,7 @@ make_DHelper(test_I) {
 }
 
 make_DHelper(SI2E) {
+	puts("***");
   assert(id_dest->width == 2 || id_dest->width == 4);
   decode_op_rm(eip, id_dest, true, NULL, false);
   id_src->width = 1;
@@ -260,7 +261,6 @@ make_DHelper(a2O) {
 }
 
 make_DHelper(J) {
-	puts("***");
   decode_op_SI(eip, id_dest, false);
   // the target address can be computed in the decode stage
   decoding.jmp_eip = id_dest->simm + *eip;
