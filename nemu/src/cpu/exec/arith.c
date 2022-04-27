@@ -23,7 +23,6 @@ make_EHelper(sub) {
 	rtl_and(&t0, &t1, &t2);                    //t0判断是否溢出，就是当(负数-正数=正数)和(正数-负数=负数)时为溢出
 	rtl_msb(&t0, &t0, id_dest->width);         //取最高位，即符号位
 	rtl_set_OF(&t0);
-	
   print_asm_template2(sub);
 }
 
