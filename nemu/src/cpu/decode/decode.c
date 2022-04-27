@@ -195,7 +195,6 @@ make_DHelper(test_I) {
 }
 
 make_DHelper(SI2E) {
-	puts("***");
   assert(id_dest->width == 2 || id_dest->width == 4);
   decode_op_rm(eip, id_dest, true, NULL, false);
   id_src->width = 1;
