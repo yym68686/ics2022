@@ -20,8 +20,9 @@ function init() {
   fi
 }
 
-read -r -p "Are you sure to initialize everything? [y/n] " input
-case $input in
+# read -r -p "Are you sure to initialize everything? [y/n] " input
+# case $input in
+case y in
   [yY])
     init nemu NEMU_HOME
     init nexus-am AM_HOME
