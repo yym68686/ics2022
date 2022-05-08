@@ -28,7 +28,6 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
 	rtl_sub(&t3, &id_dest->val, &id_src->val);
-	printf("t3:0x%08x\n", t3);
 
 	// 更新ZF,SF标志位
 	rtl_update_ZFSF(&t3, id_dest->width);
@@ -39,12 +38,11 @@ make_EHelper(cmp) {
 	rtl_set_CF(&t1);
 
 	// 更新OF标志位
-	rtl_xor(&t2, &id_dest->val, &id_src->val);
-	rtl_xor(&t1, &id_dest->val, &t0);
+	rtl_xor(&t1, &id_dest->val, &id_src->val);
+	rtl_xor(&t2, &id_dest->val, &t0);
 	rtl_and(&t0, &t1, &t2);
 	rtl_msb(&t0, &t0, id_dest->width);
 	rtl_set_OF(&t0);
-	printf("t0:0x%08x\n", t0);
 
 	print_asm_template2(cmp);
 }
