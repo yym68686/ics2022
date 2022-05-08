@@ -28,9 +28,16 @@ make_EHelper(xor) {
 }
 
 make_EHelper(or) {
-  TODO();
+    rtl_or(&t2, &id_dest->val, &id_src->val);
+    printf("id_dest->val:%x\n", id_dest->val);
+    printf("id_src->val:%x,t2:%d\n", id_src->val, t2);
 
-  print_asm_template2(or);
+    operand_write(id_dest, &t2);
+    rtl_update_ZFSF(&t2, id_dest->width);
+    rtl_set_OF(&tzero);
+    rtl_set_CF(&tzero);;
+
+    print_asm_template2(or);
 }
 
 make_EHelper(sar) {
