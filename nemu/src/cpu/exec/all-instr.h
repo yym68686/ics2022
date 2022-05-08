@@ -17,3 +17,4 @@ make_EHelper(lea);
 make_EHelper(and);
 make_EHelper(jmp);
 make_EHelper(cmp);
+make_EHelper(jcc);
