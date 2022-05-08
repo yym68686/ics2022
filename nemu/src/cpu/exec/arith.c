@@ -27,18 +27,18 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-	rtl_sub(&t1, &id_dest->val, &id_src->val);
+	rtl_sub(&t0, &id_dest->val, &id_src->val);
 
 	// 更新ZF,SF标志位
-	rtl_update_ZFSF(&t1, id_dest->width);
+	rtl_update_ZFSF(&t0, id_dest->width);
 	
 	// 更新CF标志位
-	rtl_sltu(&t3, &id_dest->val, &t1);
+	rtl_sltu(&t3, &id_dest->val, &t0);
 	rtl_set_CF(&t3);
 
 	// 更新OF标志位
 	rtl_xor(&t2, &id_dest->val, &id_src->val);
-	rtl_xor(&t1, &id_dest->val, &t1);
+	rtl_xor(&t1, &id_dest->val, &t0);
 	rtl_and(&t0, &t1, &t2);
 	rtl_msb(&t0, &t0, id_dest->width);
 	rtl_set_OF(&t0);
