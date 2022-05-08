@@ -5,8 +5,8 @@ make_EHelper(add) {
   operand_write(id_dest, &t1); //写入目的操作数
   rtl_update_ZFSF(&t1, id_dest->width); //更新ZFSF位
   t1 = 0;
-  rtl_set_OF(&t0); //设置OF位为0
-  rtl_set_CF(&t0); //设置CF位为0
+  rtl_set_OF(&t1); //设置OF位为0
+  rtl_set_CF(&t1); //设置CF位为0
 
   print_asm_template2(add);
 }
