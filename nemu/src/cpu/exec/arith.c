@@ -30,7 +30,7 @@ make_EHelper(cmp) {
 	rtl_sub(&t3, &id_dest->val, &id_src->val);
 
 	// 更新ZF,SF标志位
-	rtl_update_ZFSF(&t3, id_dest->width);
+	rtl_update_ZFSF(&t3, id_dest->width); // rtl_update_ZFSF函数内部临时变量是t0，所以不能用t0传参，否则更新SF会出错，因为更新ZF时，t0会变
 	
 	// 更新CF标志位
 	rtl_sltu(&t1, &id_dest->val, &t3);
