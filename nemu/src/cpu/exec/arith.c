@@ -27,52 +27,17 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-// 	rtl_sub(&t0, &id_dest->val, &id_src->val); //目的操作数减源操作数
-// 	t2 = t0; // 暂时保存相减的结果
-// 	printf("sub:0x%08x\n", t0);
-// 	printf("id_dest->val:0x%08x\n", id_dest->val);
-// 	printf("id_src->val:0x%08x\n", id_src->val);
+	rtl_sub(&t1, &id_dest->val, &id_src->val);
+	rtl_update_ZFSF(&t1, id_dest->width);
+	
+	rtl_sltu(&t2, &id_dest->val, &t1);
+	rtl_set_CF(&t2);
 
-// 	// 更新ZF,SF标志位
-//     rtl_update_ZFSF(&t0, id_dest->width);
-// 	rtl_get_ZF(&t1);
-// 	printf("ZF:0x%08x\n", t1);
-
-// 	// 更新CF标志位
-//     rtl_sltu(&t1, &t2, &t0);
-//     rtl_set_CF(&t1);
-// 	printf("CF:0x%08x\n", t1);
-
-// 	// 更新OF标志位
-// 	rtl_xor(&t1, &id_dest->val, &id_src->val); //当被减数与减数符号不一样时，t1 = 1;
-// 	rtl_xor(&t2, &id_dest->val, &t0);          //当减法结果与被减数符号不一样时，t2 = 1;
-// 	rtl_and(&t0, &t1, &t2);                    //t0判断是否溢出，就是当(负数-正数=正数)和(正数-负数=负数)时为溢出
-// 	rtl_msb(&t0, &t0, id_dest->width);         //取最高位，即符号位
-//     rtl_set_OF(&t0);
-
-// 	rtl_sub(&t0, &id_dest->val, &id_src->val);
-//     rtl_update_ZFSF(&t0, id_dest->width);
-//     rtl_sltu(&t1, &id_dest->val, &t0);
-// 
-//     rtl_set_CF(&t1);
-// 
-//     rtl_xor(&t1, &id_dest->val, &id_src->val);
-//     rtl_xor(&t2, &id_dest->val, &t0);
-//     rtl_and(&t1, &t1, &t2);
-//     rtl_msb(&t1, &t1, id_dest->width);
-//     rtl_set_OF(&t1);
-
-rtl_sub(&t1, &id_dest->val, &id_src->val);
-rtl_update_ZFSF(&t1, id_dest->width);
-rtl_sltu(&t2, &id_dest->val, &t1);
-
-rtl_set_CF(&t2);
-
-rtl_xor(&t2, &id_dest->val, &id_src->val);
-rtl_xor(&t1, &id_dest->val, &t1);
-rtl_and(&t0, &t1, &t2);
-rtl_msb(&t0, &t0, id_dest->width);
-rtl_set_OF(&t0);
+	rtl_xor(&t2, &id_dest->val, &id_src->val);
+	rtl_xor(&t1, &id_dest->val, &t1);
+	rtl_and(&t0, &t1, &t2);
+	rtl_msb(&t0, &t0, id_dest->width);
+	rtl_set_OF(&t0);
 
 	print_asm_template2(cmp);
 }
