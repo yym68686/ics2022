@@ -34,8 +34,8 @@ make_EHelper(cmp) {
 	rtl_update_ZFSF(&t3, id_dest->width);
 	
 	// 更新CF标志位
-	rtl_sltu(&t2, &id_dest->val, &t3);
-	rtl_set_CF(&t2);
+	rtl_sltu(&t1, &id_dest->val, &t3);
+	rtl_set_CF(&t1);
 
 	// 更新OF标志位
 	rtl_xor(&t2, &id_dest->val, &id_src->val);
