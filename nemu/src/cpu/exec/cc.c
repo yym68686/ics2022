@@ -26,7 +26,6 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_BE: //6
       rtl_get_CF(&t0);
       rtl_get_ZF(&t1);
-	  printf("0x%08x\n", t0 || t1);
       rtl_or(dest, &t0, &t1); //小于等于，CF和ZF至少一个等于1
       break;
     case CC_S: //8
