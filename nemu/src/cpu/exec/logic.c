@@ -9,7 +9,8 @@ make_EHelper(test) {
 make_EHelper(and) {
   rtl_and(&t1, &id_dest->val, &id_src->val); //目的操作数与源操作数
   operand_write(id_dest, &t1); //写入目的操作数
-  printf("t1:0x%08x\n", t1);
+  printf("t1 :0x%08x\n", t1);
+  printf("esp:0x%08x\n", cpu.esp);
   rtl_update_ZFSF(&t1, id_dest->width); //更新ZFSF位
   t1 = 0;
   rtl_set_OF(&t1); //设置OF位为0
