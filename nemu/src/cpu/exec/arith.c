@@ -62,9 +62,17 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  TODO();
+	rtl_addi(&t3, &id_dest->val, 1);
+	operand_write(id_dest, &t3);
 
-  print_asm_template1(inc);
+	// 更新ZF,SF标志位
+	rtl_update_ZFSF(&t3, id_dest->width); // rtl_update_ZFSF函数内部临时变量是t0，所以不能用t0传参，否则更新SF会出错，因为更新ZF时，t0会变
+
+	// 更新OF标志位
+	rtl_xor(&t2, &id_dest->val, &t3);
+	rtl_msb(&t2, &t2, id_dest->width);
+	rtl_set_OF(&t2);
+	print_asm_template1(inc);
 }
 
 make_EHelper(dec) {
