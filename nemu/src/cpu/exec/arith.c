@@ -31,10 +31,13 @@ make_EHelper(cmp) {
 
 	// 更新ZF,SF标志位
     rtl_update_ZFSF(&t0, id_dest->width);
+	rtl_get_ZF(&t1);
+	printf("ZF:0x%08x\n", t1);
 
 	// 更新CF标志位
     rtl_sltu(&t1, &id_dest->val, &t0);
     rtl_set_CF(&t1);
+	printf("CF:0x%08x\n", t1);
 
 	// 更新OF标志位
 	rtl_xor(&t1, &id_dest->val, &id_src->val); //当被减数与减数符号不一样时，t1 = 1;
