@@ -27,7 +27,7 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-// 	rtl_sub(&t0, &id_dest->val, &id_src->val); // 目的操作数减源操作数
+// 	rtl_sub(&t0, &id_dest->val, &id_src->val); //目的操作数减源操作数
 // 	t2 = t0; // 暂时保存相减的结果
 // 	printf("sub:0x%08x\n", t0);
 // 	printf("id_dest->val:0x%08x\n", id_dest->val);
@@ -51,11 +51,14 @@ make_EHelper(cmp) {
 //     rtl_set_OF(&t0);
 
 	rtl_sub(&t2, &id_dest->val, &id_src->val);
+	// 	更新ZF,SF标志位
     rtl_update_ZFSF(&t2, id_dest->width);
-    rtl_sltu(&t0, &id_dest->val, &t2);
 
+	// 	更新CF标志位
+    rtl_sltu(&t0, &id_dest->val, &t2);
     rtl_set_CF(&t0);
 
+	// 	更新OF标志位
     rtl_xor(&t0, &id_dest->val, &id_src->val);
     rtl_xor(&t1, &id_dest->val, &t2);
     rtl_and(&t0, &t0, &t1);
