@@ -30,9 +30,9 @@ make_EHelper(cmp) {
 	rtl_sub(&t3, &id_dest->val, &id_src->val);
 	printf("t3:0x%08x\n", t3);
 
-	t0 = t3;
 	// 更新ZF,SF标志位
-	rtl_update_ZFSF(&t0, id_dest->width);
+	rtl_update_ZFSF(&t3, id_dest->width);
+	t0 = t3;
 	
 	// 更新CF标志位
 	rtl_sltu(&t1, &id_dest->val, &t0);
