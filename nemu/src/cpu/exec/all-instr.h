@@ -23,3 +23,4 @@ make_EHelper(adc);
 make_EHelper(xor);
 make_EHelper(or);
 make_EHelper(test);
+make_EHelper(setcc);
