@@ -36,6 +36,7 @@ make_EHelper(cmp) {
 	// 更新CF标志位
 	rtl_sltu(&t1, &id_dest->val, &t3);
 	rtl_set_CF(&t1);
+	printf("CF:0x%08x\n", t1);
 
 	// 更新OF标志位
 	rtl_xor(&t2, &id_dest->val, &id_src->val);
