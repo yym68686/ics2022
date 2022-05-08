@@ -38,8 +38,8 @@ make_EHelper(cmp) {
 	rtl_set_CF(&t1);
 
 	// 更新OF标志位
-	rtl_xor(&t1, &id_dest->val, &id_src->val);
-	rtl_xor(&t2, &id_dest->val, &t0);
+	rtl_xor(&t2, &id_dest->val, &id_src->val);
+	rtl_xor(&t1, &id_dest->val, &t0);
 	rtl_and(&t0, &t1, &t2);
 	rtl_msb(&t0, &t0, id_dest->width);
 	rtl_set_OF(&t0);
