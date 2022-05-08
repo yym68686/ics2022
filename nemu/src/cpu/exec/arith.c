@@ -56,7 +56,7 @@ make_EHelper(cmp) {
 
 	// 	更新CF标志位
     rtl_sltu(&t1, &id_dest->val, &t0);
-    rtl_set_CF(&t0);
+    rtl_set_CF(&t1);
 
 	// 	更新OF标志位
     rtl_xor(&t1, &id_dest->val, &id_src->val);
