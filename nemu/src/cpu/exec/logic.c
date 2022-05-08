@@ -18,9 +18,13 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor) {
-  TODO();
-
-  print_asm_template2(xor);
+	rtl_xor(&t0, &id_dest->val, &id_src->val);
+	operand_write(id_dest, &t0); //写入目的操作数
+	t1 = 0;
+	rtl_set_OF(&t1);
+	rtl_set_CF(&t1);
+	rtl_update_ZFSF(&id_dest->val, &id_dest->width);
+	print_asm_template2(xor);
 }
 
 make_EHelper(or) {
