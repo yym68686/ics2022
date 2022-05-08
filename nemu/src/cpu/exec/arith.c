@@ -28,6 +28,7 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
 	rtl_sub(&t0, &id_dest->val, &id_src->val); // 目的操作数减源操作数
+	t2 = t0; // 暂时保存相减的结果
 	printf("id_dest->val:0x%08x\n", id_dest->val);
 	printf("id_src->val:0x%08x\n", id_src->val);
 
@@ -37,7 +38,7 @@ make_EHelper(cmp) {
 	printf("ZF:0x%08x\n", t1);
 
 	// 更新CF标志位
-    rtl_sltu(&t1, &id_dest->val, &t0);
+    rtl_sltu(&t1, &t2, &t0);
     rtl_set_CF(&t1);
 	printf("CF:0x%08x\n", t1);
 
