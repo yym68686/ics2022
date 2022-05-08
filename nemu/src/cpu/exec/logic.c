@@ -13,7 +13,6 @@ make_EHelper(and) {
   t1 = 0;
   rtl_set_OF(&t1); //设置OF位为0
   rtl_set_CF(&t1); //设置CF位为0
-  puts("***");
 
   print_asm_template2(and);
 }
