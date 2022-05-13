@@ -28,3 +28,4 @@ make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(inc);
 make_EHelper(pusha);
+make_EHelper(sar);
