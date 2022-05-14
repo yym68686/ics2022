@@ -190,15 +190,16 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  printf("updateZF: 0x%08x\n", *result);
   if (*result == 0)
 	  t0 = 1;
   else t0 = 0;
   rtl_set_ZF(&t0);
+  printf("updateZF: 0x%08x\n", *result);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
+  printf("updateSF result: 0x%08x\n", *result);
   t0 = *result >> (width * 8 - 1) & 0x1;
   printf("updateSF: 0x%08x width: %d\n", t0, width);
   rtl_set_SF(&t0);
@@ -206,7 +207,6 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
   rtl_update_ZF(result, width);
-  printf("updateSF result: 0x%08x\n", *result);
   rtl_update_SF(result, width);
 }
 
