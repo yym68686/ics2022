@@ -22,19 +22,19 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-	rtl_sub(&t0, &id_dest->val, &id_src->val); // 目的操作数减源操作数
-	operand_write(id_dest, &t0); //将结果写回目的操作数
+	rtl_sub(&t3, &id_dest->val, &id_src->val); // 目的操作数减源操作数
+	operand_write(id_dest, &t3); //将结果写回目的操作数
 
 	// 更新ZF,SF标志位
-	rtl_update_ZFSF(&t0, id_dest->width); 
+	rtl_update_ZFSF(&t3, id_dest->width); 
 
 	// 更新CF标志位
-	rtl_sltu(&t1, &id_dest->val, &t0); //当 被减数<减法结果，CF = 1;
+	rtl_sltu(&t1, &id_dest->val, &t3); //当 被减数<减法结果，CF = 1;
 	rtl_set_CF(&t1);
 
 	// 更新OF标志位
 	rtl_xor(&t1, &id_dest->val, &id_src->val); //当被减数与减数符号不一样时，t1 = 1;
-	rtl_xor(&t2, &id_dest->val, &t0);          //当减法结果与被减数符号不一样时，t2 = 1;
+	rtl_xor(&t2, &id_dest->val, &t3);          //当减法结果与被减数符号不一样时，t2 = 1;
 	rtl_and(&t0, &t1, &t2);                    //t0判断是否溢出，就是当(负数-正数=正数)和(正数-负数=负数)时为溢出
 	rtl_msb(&t0, &t0, id_dest->width);         //取最高位，即符号位
 	rtl_set_OF(&t0);
@@ -123,8 +123,6 @@ make_EHelper(sbb) {
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
   rtl_sub(&t2, &t2, &t1);
-  printf("CF:0x%08x\n", t1);
-  printf("t2-CF:0x%08x\n", t2);
   operand_write(id_dest, &t2);
 
   rtl_update_ZFSF(&t2, id_dest->width);
