@@ -123,6 +123,8 @@ make_EHelper(sbb) {
   rtl_sltu(&t3, &id_dest->val, &t2);
   rtl_get_CF(&t1);
   rtl_sub(&t2, &t2, &t1);
+  printf("CF:0x%08x\n", t1);
+  printf("t2-CF:0x%08x\n", t2);
   operand_write(id_dest, &t2);
 
   rtl_update_ZFSF(&t2, id_dest->width);
