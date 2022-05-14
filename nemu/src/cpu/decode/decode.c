@@ -79,8 +79,9 @@ static inline make_DopHelper(r) {
   }
 
 #ifdef DEBUG
-printf("str:%s op->reg:%d op->width:%d\n", op->str, op->reg, op->width);
+printf("1str:%s op->reg:%d op->width:%d\n", op->str, op->reg, op->width);
   snprintf(op->str, OP_STR_SIZE, "%%%s", reg_name(op->reg, op->width));
+printf("2str:%s op->reg:%d op->width:%d\n", op->str, op->reg, op->width);
 #endif
 }
 
