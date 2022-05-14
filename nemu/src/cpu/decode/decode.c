@@ -74,15 +74,12 @@ static inline make_DopHelper(a) {
 static inline make_DopHelper(r) {
   op->type = OP_TYPE_REG;
   op->reg = decoding.opcode & 0x7;
-printf("0str:%s decoding.opcode:0x%x op->reg:%d op->width:%d\n", op->str, decoding.opcode, op->reg, op->width);
   if (load_val) {
     rtl_lr(&op->val, op->reg, op->width);
   }
 
 #ifdef DEBUG
-printf("1str:%s op->reg:%d op->width:%d\n", op->str, op->reg, op->width);
   snprintf(op->str, OP_STR_SIZE, "%%%s", reg_name(op->reg, op->width));
-printf("2str:%s op->reg:%d op->width:%d\n", op->str, op->reg, op->width);
 #endif
 }
 
