@@ -1,8 +1,8 @@
 #include "cpu/exec.h"
 
 make_EHelper(test) {
-    rtl_and(&t0, &id_dest->val, &id_src->val);
-    rtl_update_ZFSF(&t0, id_dest->width);
+    rtl_and(&t1, &id_dest->val, &id_src->val);
+    rtl_update_ZFSF(&t1, id_dest->width); //千万不要用t0，因为更新ZF时会用到t0，会把一开始的t0值覆盖
     rtl_set_CF(&tzero);
     rtl_set_OF(&tzero);
     print_asm_template2(test);

@@ -38,7 +38,6 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       break;
     case CC_LE: //14
       rtl_get_ZF(&t0);
-	  printf("ZF: 0x%x\n", t0);
       rtl_get_SF(&t1);
       rtl_get_OF(&t2);
       rtl_xor(&t3, &t1, &t2);
