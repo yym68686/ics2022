@@ -37,6 +37,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       rtl_xor(dest, &t1, &t0); //带符号小于，SF不等于OF
       break;
     case CC_LE: //14
+	puts("****");
       rtl_get_ZF(&t0);
       rtl_get_SF(&t1);
       rtl_get_OF(&t2);
