@@ -90,7 +90,7 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-    if(!id_dest->val){// 操作数为零
+    if(!id_dest->val)// 操作数为零
         rtl_set_CF(&tzero);
     else{
         t0 = 1;
