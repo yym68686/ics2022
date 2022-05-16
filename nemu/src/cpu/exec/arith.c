@@ -90,9 +90,25 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
+    if(!id_dest->val){// 操作数为零
+        rtl_set_CF(&tzero);
+    else{
+        t0 = 1;
+        rtl_set_CF(&t0);
+    }
+    t0= -id_dest->val; // 取反
+    operand_write(id_dest, &t0);
 
-  print_asm_template1(neg);
+    // 更新ZF,SF标志位
+    rtl_update_ZFSF(&t3, id_dest->width);
+
+    // 更新OF标志位
+    rtl_xor(&t1, &id_dest->val, &id_src->val);
+    rtl_xor(&t2, &id_dest->val, &t3);
+    rtl_and(&t0, &t1, &t2);
+    rtl_msb(&t0, &t0, id_dest->width);
+    rtl_set_OF(&t0);
+    print_asm_template1(neg);
 }
 
 make_EHelper(adc) {
