@@ -39,6 +39,10 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 void _draw_sync() {
 }
 
+#define I8042_DATA_PORT 0x60
+#define I8042_STATUS_PORT 0x64
 int _read_key() {
+  if (inb(I8042_STATUS_PORT) == 1)
+    return inl(I8042_DATA_PORT);
   return _KEY_NONE;
 }
