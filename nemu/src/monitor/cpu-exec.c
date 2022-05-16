@@ -24,7 +24,9 @@ void cpu_exec(uint64_t n) {
   bool print_flag = n < MAX_INSTR_TO_PRINT;
 
   for (; n > 0; n --) {
+#ifdef DEBUG
 	uint32_t old_eip = cpu.eip;
+#endif
     /* Execute one instruction, including instruction fetch,
      * instruction decode, and the actual execution. */
     exec_wrapper(print_flag);
