@@ -27,7 +27,6 @@ make_EHelper(setcc);
 make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(inc);
-make_EHelper(pusha);
 make_EHelper(sar);
 make_EHelper(shl);
 make_EHelper(not);
