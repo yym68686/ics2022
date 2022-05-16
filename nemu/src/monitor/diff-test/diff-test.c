@@ -152,10 +152,6 @@ void difftest_step(uint32_t eip) {
   if (r.eip != cpu.eip || r.eax != cpu.eax || r.ebx != cpu.ebx || r.ecx != cpu.ecx || r.edx != cpu.edx || r.esp != cpu.esp || r.ebp != cpu.ebp || r.esi != cpu.esi || r.edi != cpu.edi){
 	  diff = true;
 	  printf("0x%08x\n", eip);
-	  printf("qemu.CF:0x%08x, nemu.CF:0x%08x\n", r.eflags.CF, cpu.eflags.CF);
-	  printf("qemu.ZF:0x%08x, nemu.ZF:0x%08x\n", r.eflags.ZF, cpu.eflags.ZF);
-	  printf("qemu.SF:0x%08x, nemu.SF:0x%08x\n", r.eflags.SF, cpu.eflags.SF);
-	  printf("qemu.OF:0x%08x, nemu.OF:0x%08x\n", r.eflags.OF, cpu.eflags.OF);
 	  printf("qemu.eip:0x%08x, nemu.eip:0x%08x\n", r.eip, cpu.eip);
 	  printf("qemu.eax:0x%08x, nemu.eax:0x%08x\n", r.eax, cpu.eax);
 	  printf("qemu.ebx:0x%08x, nemu.ebx:0x%08x\n", r.ebx, cpu.ebx);
