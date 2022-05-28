@@ -20,27 +20,51 @@ make_EHelper(pop) {
 
 make_EHelper(pusha) {
     t0 = cpu.esp;
-    rtl_push(&cpu.eax);
-    rtl_push(&cpu.ecx);
-    rtl_push(&cpu.edx);
-    rtl_push(&cpu.ebx);
-    rtl_push(&t0);
-    rtl_push(&cpu.ebp);
-    rtl_push(&cpu.esi);
-    rtl_push(&cpu.edi);
+    if(decoding.is_operand_size_16) {
+        rtl_lr_w(&t1, R_AX); rtl_push(&t1);
+        rtl_lr_w(&t1, R_CX); rtl_push(&t1);
+        rtl_lr_w(&t1, R_DX); rtl_push(&t1);
+        rtl_lr_w(&t1, R_BX); rtl_push(&t1);
+        rtl_push(&t0);
+        rtl_lr_w(&t1, R_BP); rtl_push(&t1);
+        rtl_lr_w(&t1, R_SI); rtl_push(&t1);
+        rtl_lr_w(&t1, R_DI); rtl_push(&t1);
+        
+    }
+    else {
+        rtl_lr_l(&t1, R_EAX); rtl_push(&t1);
+        rtl_lr_l(&t1, R_ECX); rtl_push(&t1);
+        rtl_lr_l(&t1, R_EDX); rtl_push(&t1);
+        rtl_lr_l(&t1, R_EBX); rtl_push(&t1);
+        rtl_push(&t0);
+        rtl_lr_l(&t1, R_EBP); rtl_push(&t1);
+        rtl_lr_l(&t1, R_ESI); rtl_push(&t1);
+        rtl_lr_l(&t1, R_EDI); rtl_push(&t1);
+    }
     print_asm("pusha");
 }
 
 make_EHelper(popa) {
-    t0 = cpu.esp;
-    rtl_pop(&cpu.edi);
-    rtl_pop(&cpu.esi);
-    rtl_pop(&cpu.ebp);
-    rtl_pop(&t0);
-    rtl_pop(&cpu.ebx);
-    rtl_pop(&cpu.edx);
-    rtl_pop(&cpu.ecx);
-    rtl_pop(&cpu.eax);
+    if(decoding.is_operand_size_16) {
+        rtl_pop(&t1); rtl_sr_w(R_DI, &t1);
+        rtl_pop(&t1); rtl_sr_w(R_SI, &t1);
+        rtl_pop(&t1); rtl_sr_w(R_BP, &t1);
+        rtl_pop(&t1);
+        rtl_pop(&t1); rtl_sr_w(R_BX, &t1);
+        rtl_pop(&t1); rtl_sr_w(R_DX, &t1);
+        rtl_pop(&t1); rtl_sr_w(R_CX, &t1);
+        rtl_pop(&t1); rtl_sr_w(R_AX, &t1);
+    }
+    else {
+        rtl_pop(&t1); rtl_sr_l(R_EDI, &t1);
+        rtl_pop(&t1); rtl_sr_l(R_ESI, &t1);
+        rtl_pop(&t1); rtl_sr_l(R_EBP, &t1);
+        rtl_pop(&t1);
+        rtl_pop(&t1); rtl_sr_l(R_EBX, &t1);
+        rtl_pop(&t1); rtl_sr_l(R_EDX, &t1);
+        rtl_pop(&t1); rtl_sr_l(R_ECX, &t1);
+        rtl_pop(&t1); rtl_sr_l(R_EAX, &t1);
+    }
     print_asm("popa");
 }
 
