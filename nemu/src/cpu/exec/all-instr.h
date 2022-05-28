@@ -50,3 +50,4 @@ make_EHelper(out);
 make_EHelper(neg);
 make_EHelper(reti);
 make_EHelper(rol);
+make_EHelper(int);
