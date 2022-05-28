@@ -28,6 +28,7 @@ make_EHelper(mov_cr2r) {
 #endif
 }
 
+void raise_intr(uint8_t NO, vaddr_t ret_addr);
 make_EHelper(int) {
   raise_intr(id_dest->val, decoding.seq_eip);
   print_asm("int %s", id_dest->str);
