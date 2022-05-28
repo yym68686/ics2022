@@ -38,26 +38,26 @@ make_EHelper(int) {
 #endif
 }
 
-make_EHelper(iret) {
-    // TODO();
-    rtl_pop(&t0);
-    decoding.is_jmp = 1;
-    decoding.jmp_eip = t0;
-    rtl_pop(&t0);
-    cpu.eflags.value = t0;
-    rtl_pop(&t0);
-    cpu.cs = (uint16_t)t0;
-    print_asm("iret");
-}
-
 // make_EHelper(iret) {
-//     rtl_pop(&decoding.jmp_eip);
-//     decoding.is_jmp=1;
+//     // TODO();
+//     rtl_pop(&t0);
+//     decoding.is_jmp = 1;
+//     decoding.jmp_eip = t0;
+//     rtl_pop(&t0);
+//     cpu.eflags.value = t0;
 //     rtl_pop(&t0);
 //     cpu.cs = (uint16_t)t0;
-//     rtl_pop(&cpu.eflags.value);
 //     print_asm("iret");
 // }
+
+make_EHelper(iret) {
+    rtl_pop(&decoding.jmp_eip);
+    decoding.is_jmp = 1;
+    rtl_pop(&t0);
+    cpu.cs = (uint16_t)t0;
+    rtl_pop(&cpu.eflags.value);
+    print_asm("iret");
+}
 
 uint32_t pio_read(ioaddr_t, int);
 void pio_write(ioaddr_t, int, uint32_t);
