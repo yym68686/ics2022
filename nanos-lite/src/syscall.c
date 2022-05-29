@@ -33,11 +33,6 @@ static inline uintptr_t sys_brk(uintptr_t new_brk) {
   return 1;
 }
 
-static inline uintptr_t sys_none(_RegSet *r) {
-    SYSCALL_ARG1(r)=1; //设置系统调用的返回值，在eax中放返回值
-    return 1;
-}
-
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
@@ -46,7 +41,10 @@ _RegSet* do_syscall(_RegSet *r) {
   a[3] = SYSCALL_ARG4(r);
   switch (a[0]) {
 	case SYS_none:
-		sys_none(r);
+		SYSCALL_ARG1(r) = 1; //设置系统调用的返回值，在eax中放返回值
+		break;
+	case SYS_exit:
+		_halt(SYSCALL_ARG2(r));
 		break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
