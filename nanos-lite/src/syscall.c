@@ -10,8 +10,7 @@ static inline uintptr_t sys_open(uintptr_t pathname, uintptr_t flags, uintptr_t 
 }
 
 static inline uintptr_t sys_write(uintptr_t fd, uintptr_t buf, uintptr_t len) {
-  TODO();
-  return 1;
+  return fs_write(fd, (uint8_t *)buf, len);
 }
 
 static inline uintptr_t sys_read(uintptr_t fd, uintptr_t buf, uintptr_t len) {
@@ -41,10 +40,13 @@ _RegSet* do_syscall(_RegSet *r) {
   a[3] = SYSCALL_ARG4(r);
   switch (a[0]) {
 	case SYS_none:
-		SYSCALL_ARG1(r) = 1; //设置系统调用的返回值，在eax中放返回值
+		r->eax = 1; //设置系统调用的返回值，在eax中放返回值
 		break;
 	case SYS_exit:
-		_halt(SYSCALL_ARG2(r));
+		_halt(a[1]);
+		break;
+	case SYS_write:
+		r->eax = sys_write(a[1], (uint8_t *)a[2], a[3]);
 		break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
