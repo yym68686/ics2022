@@ -1,5 +1,5 @@
 #include "common.h"
-
+#include "fs.h"
 #define DEFAULT_ENTRY ((void *)0x4000000)
 void ramdisk_read(void *, uint32_t, uint32_t);
 size_t get_ramdisk_size();
