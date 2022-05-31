@@ -13,8 +13,8 @@ AS = $(CC)
 INCLUDES  = $(addprefix -I, $(INC_DIR))
 ISA_DEF = __ISA_$(shell echo $(ISA) | tr a-z A-Z)__
 
-CFLAGS   += -std=gnu99 -O2 -MMD $(INCLUDES) -D$(ISA_DEF) -fdata-sections -ffunction-sections -static
-CXXFLAGS += -std=c++11 -O2 -MMD $(INCLUDES) -D$(ISA_DEF) -fdata-sections -ffunction-sections -static
+CFLAGS   += -std=gnu99 -O0 -MMD $(INCLUDES) -D$(ISA_DEF) -fdata-sections -ffunction-sections -static
+CXXFLAGS += -std=c++11 -O0 -MMD $(INCLUDES) -D$(ISA_DEF) -fdata-sections -ffunction-sections -static
 ASFLAGS  +=                -MMD $(INCLUDES) -D$(ISA_DEF)
 LDFLAGS  += -e _start
 
