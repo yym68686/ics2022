@@ -29,18 +29,6 @@ int _write(int fd, void *buf, size_t count){
   return _syscall_(SYS_write, fd, (uintptr_t)buf, count);
 }
 
-int _read(int fd, void *buf, size_t count) {
-  return _syscall_(SYS_read, fd, (uintptr_t)buf, count);
-}
-
-int _close(int fd) {
-  return _syscall_(SYS_close, fd, 0, 0);
-}
-
-off_t _lseek(int fd, off_t offset, int whence) {
-  return _syscall_(SYS_lseek, fd, offset, whence);
-}
-
 extern char _end;
 intptr_t program_break = (intptr_t)&_end; //记录开始位置
 void *_sbrk(intptr_t increment){
@@ -54,15 +42,15 @@ void *_sbrk(intptr_t increment){
 }
 
 int _read(int fd, void *buf, size_t count) {
-  _exit(SYS_read);
+  return _syscall_(SYS_read, fd, (uintptr_t)buf, count);
 }
 
 int _close(int fd) {
-  _exit(SYS_close);
+  return _syscall_(SYS_close, fd, 0, 0);
 }
 
 off_t _lseek(int fd, off_t offset, int whence) {
-  _exit(SYS_lseek);
+  return _syscall_(SYS_lseek, fd, offset, whence);
 }
 
 // The code below is not used by Nanos-lite.
