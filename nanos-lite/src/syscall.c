@@ -34,18 +34,14 @@ _RegSet* do_syscall(_RegSet *r) {
   a[2] = SYSCALL_ARG3(r);
   a[3] = SYSCALL_ARG4(r);
   switch (a[0]) {
-	case SYS_none:
-		r->eax = 1; //设置系统调用的返回值，在eax中放返回值
-		break;
-	case SYS_exit:
-		_halt(a[1]);
-		break;
-	case SYS_write:
-		r->eax = sys_write(a[1], a[2], a[3]);
-		break;
-	case SYS_brk: 
-		r->eax = 0;
-		break;
+	case SYS_none: 	r->eax = 1; break;
+	case SYS_exit:  _halt(a[1]); break;
+	case SYS_write:	r->eax = sys_write(a[1], a[2], a[3]); break;
+	case SYS_brk:   r->eax = 0; break;
+	case SYS_read:  r->eax = fs_read(a[1], (uint8_t *)a[2], a[3]); break;
+	case SYS_open:  r->eax = fs_open((char *)a[1], a[2], a[3]); break;
+	case SYS_close: r->eax = fs_close(a[1]); break;
+	case SYS_lseek: r->eax = fs_lseek(a[1], a[2], a[3]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
