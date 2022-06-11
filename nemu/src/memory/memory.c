@@ -28,11 +28,10 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
     if(cpu.cr0.paging) {
-        //跨页访存.
+        //跨页访存 0xfff = 111111111111 = 2^12 - 1 = 4KB - 1
         if ((addr & 0xfff) + len - 1 > 0xfff) {
             uint32_t val = 0;
-            int i = 0;
-            for (; i < len; i++)
+            for (int t = 0; i < len; i++)
                 val += (1 << (8 * i)) * (uint8_t)paddr_read(page_translate(addr + i, false), 1);
             return val;
         }
