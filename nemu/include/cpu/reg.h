@@ -54,6 +54,10 @@ typedef struct {
 		uint16_t limit; // 16位limit
 	}idtr;
 	uint16_t cs;
+	struct {
+		CR0 cr0;
+		CR3 cr3;
+	};
 } CPU_state;
 
 extern CPU_state cpu;
