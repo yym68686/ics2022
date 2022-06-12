@@ -51,7 +51,7 @@ paddr_t page_translate(vaddr_t vaddr, bool flag) {
     //写回到页表项所在地址
     paddr_write(page_table_item_addr, 4, page_table_item.val);
     paddr_t paddr = (page_table_item.page_frame << 12) + (vaddr & 0xfff);
-    //Log("vaddr: %#10x, paddr: %#10x", vaddr, paddr);
+    Log("vaddr: %#10x, paddr: %#10x", vaddr, paddr);
     return paddr;
 }
 
