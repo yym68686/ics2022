@@ -4,19 +4,17 @@
 void ramdisk_read(void *, uint32_t, uint32_t);
 size_t get_ramdisk_size();
 void *new_page();
-
 uintptr_t loader(_Protect *as, const char *filename) {
     int fd = fs_open(filename, 0, 0);
     size_t len = fs_filesz(fd);
-    Log("LOAD [%d] %s. Size:%d", fd, filename, len);
-
     void *fz_end = DEFAULT_ENTRY + len;
     void *va, *pa;
     for(va = DEFAULT_ENTRY; va < fz_end; va += PGSIZE){
         pa = new_page();
+        Log("Map va to pa: 0x%08x to 0x%08x", va, pa);
         _map(as, va, pa);
         fs_read(fd, pa, (fz_end - va) < PGSIZE ? (fz_end - va) : PGSIZE);
-        Log("va: 0x%08x, pa: 0x%08x", va, pa);
     }
+    fs_close(fd);
     return (uintptr_t)DEFAULT_ENTRY;
 }

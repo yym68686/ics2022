@@ -2,7 +2,7 @@
 #include "syscall.h"
 #include "fs.h"
 
-extern int mm_brk(uint32_t new_brk);
+int mm_brk(uint32_t new_brk);
 
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
