@@ -4,27 +4,8 @@
 
 int mm_brk(uint32_t new_brk);
 
-static inline uintptr_t sys_open(uintptr_t pathname, uintptr_t flags, uintptr_t mode) {
-  TODO();
-  return 1;
-}
-
 static inline uintptr_t sys_write(uintptr_t fd, uintptr_t buf, uintptr_t len) {
   return fs_write(fd, (uint8_t *)buf, len);
-}
-
-static inline uintptr_t sys_read(uintptr_t fd, uintptr_t buf, uintptr_t len) {
-  TODO();
-  return 1;
-}
-
-static inline uintptr_t sys_lseek(uintptr_t fd, uintptr_t offset, uintptr_t whence) {
-  return fs_lseek(fd, offset, whence);
-}
-
-static inline uintptr_t sys_close(uintptr_t fd) {
-  TODO();
-  return 1;
 }
 
 _RegSet* do_syscall(_RegSet *r) {
@@ -45,5 +26,5 @@ _RegSet* do_syscall(_RegSet *r) {
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
-  return NULL;
+  return r;
 }
