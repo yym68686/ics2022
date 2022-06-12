@@ -18,7 +18,6 @@ uintptr_t loader(_Protect *as, const char *filename) {
         _map(as, (void *)vaddr, (void *)paddr);
         fs_read(fd, (void *)paddr, (endaddress - vaddr) < PGSIZE ? endaddress : PGSIZE);
     }
-
     fs_close(fd);
 
     return (uintptr_t)DEFAULT_ENTRY;
