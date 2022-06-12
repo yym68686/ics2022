@@ -26,28 +26,32 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
     memcpy(guest_to_host(addr), &data, len);
 }
 
-paddr_t page_translate(vaddr_t addr, bool flag){
-    paddr_t paddr = addr;
-    /* only when protect mode and paging mode enable translate*/
-    if(cpu.cr0.protect_enable && cpu.cr0.paging){
-        /* initialize */
-        paddr_t pdeptr, pteptr;
-        PDE pde;
-        PTE pte;
-        /* find pde and read */
-        pdeptr = (paddr_t)(cpu.cr3.page_directory_base << 12) | (paddr_t)(((addr >> 22) & 0x3ff) * 4);
-        pde.val = paddr_read(pdeptr, 4);
-        assert(pde.present);
-        pde.accessed = 1;
-        /* find pte and read */
-        pteptr = (paddr_t)(pde.page_frame << 12) | (paddr_t)(((addr >> 12) & 0x3ff) * 4);
-        pte.val = paddr_read(pteptr, 4);
-        assert(pte.present);
-        pte.accessed = 1;
-        pte.dirty = (flag == true) ? 1 : 0;
-        /* find page and read */
-        paddr = (paddr_t)(pte.page_frame << 12) | (paddr_t)(addr & 0xfff);
-    }
+paddr_t page_translate(vaddr_t vaddr, bool flag) {
+    PDE page_dir_item;
+    PTE page_table_item;
+    //页目录项的地址 = 页目录表基地址 + (页目录表索引) * 4
+    paddr_t page_dir_item_addr = (cpu.cr3.page_directory_base << 12) + ((vaddr >> 22) & 0x3ff) * 4;
+    //读取页目录项
+    page_dir_item.val = paddr_read(page_dir_item_addr, 4);
+    //验证present位
+    assert(page_dir_item.present);
+    //根据讲义，accessed为1，若为1表示该页被CPU访问过，由CPU置1，由操作系统清0
+    page_dir_item.accessed = 1;
+    //写回到页目录项所在地址
+    paddr_write(page_dir_item_addr, 4, page_dir_item.val);
+    //页表项的地址 = 页目录表项对应的页表基址 + 页表索引 * 4
+    paddr_t page_table_item_addr = (page_dir_item.page_frame << 12) + ((vaddr >> 12) & 0x3ff) * 4;
+    //读取页表项
+    page_table_item.val = paddr_read(page_table_item_addr, 4);
+    //验证present位
+    assert(page_table_item.present);
+    page_table_item.accessed = 1;
+    //如果是写操作，脏位设为1，当CPU对一个页执行写操作时，设置对应页表项的D位为1，此项仅针对页表项有效，并不会修改页目录表项的D位
+    if (flag) page_table_item.dirty = 1;
+    //写回到页表项所在地址
+    paddr_write(page_table_item_addr, 4, page_table_item.val);
+    paddr_t paddr = (page_table_item.page_frame << 12) + (vaddr & 0xfff);
+    //Log("vaddr: %#10x, paddr: %#10x", vaddr, paddr);
     return paddr;
 }
 
