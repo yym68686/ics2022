@@ -37,7 +37,7 @@ _RegSet* do_syscall(_RegSet *r) {
 	case SYS_none: 	r->eax = 1; break;
 	case SYS_exit:  _halt(a[1]); break;
 	case SYS_write:	r->eax = sys_write(a[1], a[2], a[3]); break;
-	case SYS_brk:   r->eax = 0; break;
+	case SYS_brk:   r->eax = mm_brk(a[1]); break;
 	case SYS_read:  r->eax = fs_read(a[1], (uint8_t *)a[2], a[3]); break;
 	case SYS_open:  r->eax = fs_open((char *)a[1], a[2], a[3]); break;
 	case SYS_close: r->eax = fs_close(a[1]); break;
