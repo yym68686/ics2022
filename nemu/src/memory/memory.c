@@ -26,29 +26,6 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
     memcpy(guest_to_host(addr), &data, len);
 }
 
-uint32_t vaddr_read(vaddr_t addr, int len) {
-    if(cpu.cr0.paging) {
-        //跨页访存 0x1000 = 1000000000000 = 2^12 = 4KB
-        if ((addr & 0xfff) + len > 0x1000) {
-			union {
-			  uint8_t bytes[4];
-			  uint32_t dword;
-			} data = {0};
-			for (int i = 0; i < len; i++) {
-			  paddr = page_translate(addr + i, false);
-			  data.bytes[i] = (uint8_t)paddr_read(paddr, 1);
-			}
-			return data.dword;
-        }
-        else {
-            paddr_t paddr = page_translate(addr, false);
-            return paddr_read(paddr, len);
-        }
-    }
-    else
-        return paddr_read(addr, len);
-}
-
 paddr_t page_translate(vaddr_t vaddr, bool flag) {
     PDE page_dir_item;
     PTE page_table_item;
@@ -74,9 +51,31 @@ paddr_t page_translate(vaddr_t vaddr, bool flag) {
     //写回到页表项所在地址
     paddr_write(page_table_item_addr, 4, page_table_item.val);
     paddr_t paddr = (page_table_item.page_frame << 12) + (vaddr & 0xfff);
-
     //Log("vaddr: %#10x, paddr: %#10x", vaddr, paddr);
     return paddr;
+}
+
+uint32_t vaddr_read(vaddr_t addr, int len) {
+    if(cpu.cr0.paging) {
+        //跨页访存 0x1000 = 1000000000000 = 2^12 = 4KB
+        if ((addr & 0xfff) + len > 0x1000) {
+			union {
+			  uint8_t bytes[4];
+			  uint32_t dword;
+			} data = {0};
+			for (int i = 0; i < len; i++) {
+			  paddr = page_translate(addr + i, false);
+			  data.bytes[i] = (uint8_t)paddr_read(paddr, 1);
+			}
+			return data.dword;
+        }
+        else {
+            paddr_t paddr = page_translate(addr, false);
+            return paddr_read(paddr, len);
+        }
+    }
+    else
+        return paddr_read(addr, len);
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
