@@ -26,32 +26,29 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
     memcpy(guest_to_host(addr), &data, len);
 }
 
-paddr_t page_translate(vaddr_t addr, bool is_write) {
-
- if (!cpu.cr0.paging) return addr;
- // Log("page_translate: addr: 0x%x\n", addr);
-  paddr_t dir = (addr >> 22) & 0x3ff;
-  paddr_t page = (addr >> 12) & 0x3ff;
-  paddr_t offset = addr & 0xfff;
-  paddr_t PDT_base = cpu.cr3.page_directory_base;
-  //Log("page_translate: dir: 0x%x page: 0x%x offset: 0x%x PDT_base: 0x%x\n", dir, page, offset, PDT_base);
-  PDE pde;
-  pde.val = paddr_read((PDT_base << 12) + (dir << 2), 4);
-  if (!pde.present) {
-    Log("page_translate: addr: 0x%x\n", addr);
-    Log("page_translate: dir: 0x%x page: 0x%x offset: 0x%x PDT_base: 0x%x\n", dir, page, offset, PDT_base);
-    assert(pde.present);
-  }
-  PTE pte;
-  // Log("page_translate: page_frame: 0x%x\n", pde.page_frame);
-  pte.val = paddr_read((pde.page_frame << 12) + (page << 2), 4);
-  if (!pte.present) {
-    Log("page_translate: addr: 0x%x\n", addr);
-    assert(pte.present);
-  }
-  paddr_t paddr = (pte.page_frame << 12) | offset;
-  //Log("page_translate: paddr: 0x%x\n", paddr);
-  return paddr;
+paddr_t page_translate(vaddr_t addr, bool flag){
+    paddr_t paddr = addr;
+    /* only when protect mode and paging mode enable translate*/
+    if(cpu.cr0.protect_enable && cpu.cr0.paging){
+        /* initialize */
+        paddr_t pdeptr, pteptr;
+        PDE pde;
+        PTE pte;
+        /* find pde and read */
+        pdeptr = (paddr_t)(cpu.cr3.page_directory_base << 12) | (paddr_t)(((addr >> 22) & 0x3ff) * 4);
+        pde.val = paddr_read(pdeptr, 4);
+        assert(pde.present);
+        pde.accessed = 1;
+        /* find pte and read */
+        pteptr = (paddr_t)(pde.page_frame << 12) | (paddr_t)(((addr >> 12) & 0x3ff) * 4);
+        pte.val = paddr_read(pteptr, 4);
+        assert(pte.present);
+        pte.accessed = 1;
+        pte.dirty = (flag == true) ? 1 : 0;
+        /* find page and read */
+        paddr = (paddr_t)(pte.page_frame << 12) | (paddr_t)(addr & 0xfff);
+    }
+    return paddr;
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
