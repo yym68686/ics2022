@@ -56,6 +56,7 @@ paddr_t page_translate(vaddr_t vaddr, bool flag) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
+	paddr_t paddr;
     if(cpu.cr0.paging) {
         //跨页访存 0x1000 = 1000000000000 = 2^12 = 4KB
         if ((addr & 0xfff) + len > 0x1000) {
@@ -79,6 +80,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
+	paddr_t paddr;
     if(cpu.cr0.paging) {
         //跨页访存
         if ((addr & 0xfff) + len > 0x1000)
