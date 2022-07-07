@@ -5,5 +5,5 @@
 !README.md
 !.gitignore
 !init.sh
-!md_Report
-!images
+!md_Report/
+!images/
