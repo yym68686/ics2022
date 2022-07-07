@@ -1,4 +1,5 @@
 - md_Report包含所有实验报告
+- images 存放实验报告中所有图片
 
 # ICS2021 Programming Assignment
 
